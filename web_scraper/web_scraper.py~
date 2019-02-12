@@ -8,7 +8,7 @@ import csv
 
 #######################################################
 
-def scrapeSite():
+def scrapSite():
     """
     Attempts to get the content on the Tippecanoe county inmate lsiting site (http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx)
     by making an HTTP GET request.
@@ -35,4 +35,4 @@ def scrapeSite():
         writer = csv.writer(csv_file)
         for info in data:
             writer.writerow(info)
-scrapeSite()
+scrapSite()
