@@ -22,6 +22,7 @@ from django.conf import settings
 from earlybird.views import LoginPageView
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='login_page.html')),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^login/', TemplateView.as_view(template_name='login_page.html')),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
