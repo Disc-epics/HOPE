@@ -8,7 +8,9 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 if __name__ == '__main__':
 
     user = 'disc'
-    pw = getpass('disc password: ')
+    pw = os.environ['DISC_PASSWORD']
+    if not pw:
+        pw = getpass('disc password: ')
     conn = SMBConnection(user, pw, 'login', 'templeton.ecn.purdue.edu/disc')
 
     connected = conn.connect('128.46.104.13')
