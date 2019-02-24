@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-{% load static %}
+
 <html class="container">
-
-<head>
-    <title>Hope</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static "./style.css" %}">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-</head>
-
-<body class="container">
-    <div class="col-sm-3 login-box my-auto">
-        <form class="form-seg">
-            <label for="username" class="form-text" value="Username">Username:</label>
-            <input id="username" class="in" type="text"></input>
-            <br>
-            <label for="password" class="form-text" value="Password">Password:</label>
-            <input id="password" class="in" type="password"></input>
-            <div class="row">
-                <a class="btn btn-primary" href="#">Login</a>
-                <a class="btn btn-primary" href="#">Forgot Password</a>
-            </div>
-        </form>
-    </div>
-</body>
-
+    <head>
+        <title>Hope</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./res/style.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    </head>
+    <body class="container">
+        <div class="col-sm-3 login-box my-auto">
+            <form class="form-seg">
+                <label for="username" class="form-text" value="Username">Username:</label>
+                <input id="username" class="in" type="text" value=""/>
+                <br>
+                <label for="password" class="form-text" value="Password">Password:</label>
+                <input id="password" class="in" type="password" value=""/>
+                <div class="row">
+                    <a id="login-btn" class="btn btn-primary" href="#">Login</a>
+                    <a id="forgot-btn"class="btn btn-primary" href="#">Forgot Password</a>
+                    <a id="register-btn"class="btn btn-primary" href="./register_caseworker.html">Register</a>                              
+                </div>
+                <div class="row error" id="error_msg"></div>
+            </form>            
+        </div>
+        <script src="./login.js"></script>
+    </body>
 </html>

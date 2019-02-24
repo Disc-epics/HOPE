@@ -7,9 +7,8 @@ login_button.addEventListener("click", (ev) => {
     validate(ev);
 });
 let check_validate = false;
-let link_login = document.getElementById("login-btn");
-let error_msg = document.getElementById("error_msg");
-
+const link_login = document.getElementById("login-btn");
+const error_para = document.getElementById("error_msg");
 
 function validate(ev) {
     console.log("Button has been clicked");
@@ -33,11 +32,10 @@ function validate(ev) {
     if (check_validate === true) {
         link_login.setAttribute('href', "./index.html");
     } else {
-        alert("The Email address and password do not match");
-        const paragraph = document.createElement("p");
-        const text = document.createTextNode("Sorry, the password you entered is incorrect, try again!");
-        paragraph.append(text);
-        error_msg.append(paragraph);
-        window.location.reload();        
+        // const paragraph = document.createElement("p");
+        // const text = document.createTextNode("Sorry, the password you entered is incorrect, try again!");
+        // paragraph.innerHTML(text);
+        error_msg.textContent = "Sorry, the email and password combination is incorrect, try again!";
+        // alert("The Email address and password do not match");       
     }
 }
