@@ -34,7 +34,10 @@ def run_with_cgi(application):
                 sys.stdout.write('%s: %s\r\n' % header)
             sys.stdout.write('\r\n')
 
-        sys.stdout.write(data.decode('utf-8'))
+        # apparently writing directly to the buffer is buffered, so we need to
+        # flush first to make sure that the headers are sent before the data
+        sys.stdout.flush()
+        sys.stdout.buffer.write(data)
         sys.stdout.flush()
 
     def start_response(status, response_headers, exc_info=None):
