@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import os
 from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic import TemplateView
@@ -24,5 +25,4 @@ from earlybird.views import LoginPageView
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^login/', TemplateView.as_view(template_name='login_page.html')),
-    url(r'^admin/', admin.site.urls),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static('/static/', document_root=os.path.join(settings.BASE_DIR, 'earlybird', 'static'))
