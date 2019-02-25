@@ -15,12 +15,3 @@ if __name__ == '__main__':
     conn.storeFile('disc', 'public_html/manage.py', open('manage.py', 'rb'))
 
     copy_dir(conn, 'earlybird', 'public_html')
-    # for dp, dn, filenames in os.walk('earlybird'):
-    #     try:
-    #         conn.createDirectory('disc', os.path.join('public_html', dp))
-    #     except:
-    #         pass
-    #     for name in filenames:
-    #         if os.path.splitext(name)[1] != '.pyc':
-    #             conn.storeFile('disc', os.path.join(
-    #                 'public_html', dp, name), open(os.path.join(dp, name), 'rb'))
