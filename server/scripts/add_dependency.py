@@ -21,6 +21,8 @@ with tempfile.TemporaryDirectory() as dir:
 
     print("Using {} as the temp dir".format(dir))
 
+    os.chdir(dir)
+
     # run pip to get all the files
     completed = subprocess.run(['pip', 'install', '--target=.', '--ignore-installed',
                                 '--only-binary=:all:', '--python-version=34', '--no-deps', '--upgrade', sys.argv[1]], cwd=dir)
@@ -34,5 +36,5 @@ with tempfile.TemporaryDirectory() as dir:
 
     foldername = sys.argv[1].partition('=')[0]
 
-    copy_dir(conn, os.path.join(dir, foldername),
-             os.path.join('public_html', 'deps', foldername))
+    copy_dir(conn, foldername,
+             os.path.join('public_html', 'deps'))
