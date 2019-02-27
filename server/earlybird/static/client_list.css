@@ -1,0 +1,285 @@
+/*.fixtures {
+    border-right: 1px solid rgb(238,73,73);
+    width: 20%;
+    float: left;
+    background-color: rgb(0,46,70);
+    color: white;
+    }
+    .fixtures h3, .stats h3{
+        color: white;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-family: Oxygen;
+        font-weight: 300;
+        letter-spacing: 3px;
+        margin: 20px 2rem;
+    }
+    .bet h3{
+        color:black;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-family: Oxygen;
+        font-weight: 300;
+        letter-spacing: 3px;
+        margin: 20px 2rem;
+    }
+    .profile_page h1, .profile_page h2, .col-50 form h3{
+        font-size: 1.5rem;
+        font-family: Oxygen;
+        font-weight: 300;
+        letter-spacing: 3px;
+        margin: 20px 2rem;
+    }
+    .live_games{
+        width: auto;
+        height: 350px;
+    }
+    .bet{
+        width: 55%
+    }
+    .profile{
+        height: 85px;
+    }
+    .live_data{
+        height: 420px;
+    }
+    .stats{
+        border-left: 1px solid rgb(238,73,73);
+        float: right;
+        width: 25%;
+        background-color: rgb(0,46,70)
+    }
+    .circle{
+        border-radius: 50%;
+        background-color: #999;
+        height:75px;
+        width: 75px;
+        display: inline-block;
+    }
+    .txt{
+        border: none;
+        font-size: 150%;
+        font-family: Fauna One;
+        color: black;
+        font-weight: 200;
+        width: 50%;
+        outline: #999;
+        border: 1px solid #eee
+    }
+    .top{
+        border-radius: 50%;
+        display: block;
+        height: 200px;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        clear: both;
+    }
+    .col-50{
+        font-family: Arial;
+        font-size: 17px;
+        padding: 8px;
+        -ms-flex: 50%; 
+        flex: 50%;
+        padding: 0 16px;
+        border: 1px solid #eee;
+        width: 40%;
+    }
+    .col-50 input[type=text] {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    .login-form-1, .registration-form-1, .col-50{
+    margin-top: 150px;
+}
+.txt2{
+    border: 1px solid black;
+    font-size: 150%;
+    font-family: Fauna One;
+    color: black;
+    font-weight: 200;
+    width: 20%;
+    outline: #999;
+}
+u{
+    cursor: pointer;
+}
+.col-50{
+    font-family: Arial;
+    font-size: 17px;
+    padding: 8px;
+    -ms-flex: 50%; 
+    flex: 50%;
+    padding: 0 16px;
+    border: 1px solid #eee;
+    width: 40%;
+}
+.col-50 input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.total_list{
+    border-top: 1px solid rgb(238,73,73);
+    overflow-y: scroll;
+    height: calc(100vh - 72px);
+    list-style: none;
+    margin-top: 1em;
+    padding: 0;
+    width: 100%;
+    color:#999;
+}
+.list_game{
+    text-align: center;
+    font-size: 120%;
+    font-family: Helvetica, sans-serif;
+    text-transform: uppercase;
+    margin-top:20px;
+    margin-bottom: 10px; 
+    cursor: pointer;
+}
+.logo{
+    height: 100px;
+    width: 100px;
+}
+.team_logo1, .team_logo2{
+    height: 80px;
+    width: 80px;
+}
+.team_logo1{
+    margin-right:140px
+}
+.team_logo2{
+    margin-left:140px
+}
+.logo_text p{
+    display: inline-block;
+    font-size: 250%;
+    font-weight:bold
+}
+.para_left{
+    margin-right:120px;
+}
+.para_right{
+    margin-left:90px;
+}
+.para_middle{
+    margin-right:20px;
+}
+.win-loss p{
+    display: inline-block;
+    font-size: 100%;
+    font-weight:bold;
+}
+.stat1{
+    margin-right:50px;
+}
+.stat2{
+    margin-right:200px;
+}
+.stat3{
+    margin-right:50px;
+}
+.stat1n{
+    margin-right:85px;
+}
+.stat2n{
+    margin-right:225px;
+}
+.stat3n{
+    margin-right:80px;
+}
+.bet_section{
+    float: left;
+    width: 50%;
+}
+
+.friend_section{
+    float:right;
+    width: 50%;
+}
+.txt3{
+    border: 1px solid #999;
+}
+.bet_now{
+    margin: 5px;
+    border: 1px solid rgb(238,73,73);
+    padding: 7px;
+    width: 60%;
+    border-radius: 5%;
+}
+.frands{
+    border-radius: 50%;
+    width: 35%;
+    height: 35%;
+}
+.stream{
+    border-radius: 50%;
+    width: 20%
+}
+.hi{
+    color: #999;
+}
+hr{
+    border-color: rgb(238,73,73)
+}*/
+.homeless_list {
+    border-right: 1px solid rgb(238,73,73);
+    width: 30%;
+    float: left;
+    color: white;
+}
+
+.homeless_list h3{
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-family: Oxygen;
+    font-weight: 300;
+    letter-spacing: 3px;
+    margin: 20px 2rem;
+}
+
+.names{
+    width: auto;
+    height: auto;
+}
+
+ul{
+    border-top: 1px solid rgb(238,73,73);
+    overflow-y: scroll;
+    height: calc(100vh - 72px);
+    list-style: none;
+    margin-top: 1em;
+    padding: 0;
+    width: 100%;
+    color:#999;
+}
+
+.list_name{
+    text-align: center;
+    font-size: 120%;
+    font-family: Helvetica, sans-serif;
+    text-transform: uppercase;
+    margin-top:20px;
+    margin-bottom: 10px; 
+    cursor: pointer;
+    color: black;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(238,73,73);
+}
+
+.profile{
+    /*border-right: 1px solid rgb(238,73,73);*/
+    width: auto;
+}
+
+.image{
+    border-radius: 100%;
+}
