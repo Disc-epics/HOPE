@@ -25,5 +25,5 @@ from earlybird.views import acct_page
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^login/', TemplateView.as_view(template_name='login_page.html')),
-    url(r'^account/', acct_page)
+    # url(r'^account/', acct_page)
 ] + static('/static/', document_root=os.path.join(settings.BASE_DIR, 'earlybird', 'static'))

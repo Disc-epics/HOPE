@@ -37,6 +37,8 @@ def run_with_cgi(application):
         # apparently writing directly to the buffer is buffered, so we need to
         # flush first to make sure that the headers are sent before the data
         sys.stdout.flush()
+        if isinstance(data, str):
+            data = bytes(str, 'utf-8')
         sys.stdout.buffer.write(data)
         sys.stdout.flush()
 
@@ -61,6 +63,7 @@ def run_with_cgi(application):
     finally:
         if hasattr(result, 'close'):
             result.close()
+
 
 try:
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "earlybird.settings")
