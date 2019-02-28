@@ -66,8 +66,14 @@ Use `help` to show all possibilities
 
 ### Adding dependencies
 
-Because we don't have any sort of ssh access to ECN, any dependencies we want need to be copied over. This seems like a pain,
-but actually is quite painless if you use the `scripts/add_dependency.py` script. Just run `python scripts/add_dependency.py pack==ver`,
-and it will copy it all over for you. Note that it does not copy dependencies of the dependencies, so you may have to add them manually
-via more calls to `add_dependency.py`. 
+Because we don't have ssh access to the server, running commands is a pain, and the main reason we need to do that is
+for adding dependencies. However, it can be done by editing the `django.cgi` script to run a bash script on the server.
 
+There is a convenience script for this specificly:
+
+```bash
+./scritps/add_dependency.py twilio
+```
+
+Which edits the `django.cgi` script, does an http request so it gets ran, then copies back the regular `django.cgi`.
+Yes, it's hacky, but it also works.

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import time
+import urllib.request
 import tempfile
 from getpass import getpass
 import sys
@@ -7,6 +9,7 @@ import subprocess
 import os
 from smb.SMBConnection import SMBConnection
 from deploy_util import connect, copy_dir
+import io
 
 if __name__ != '__main__':
     exit(0)
@@ -16,25 +19,22 @@ if len(sys.argv) != 2:
         sys.argv[0]))
     exit(1)
 
+cgi_install = '''#!/usr/local/bin/python3.4
+import os
+os.system("bash -c 'pip3 install --target=deps --ignore-installed --no-deps --upgrade {} > error.txt'")
+'''.format(sys.argv[1])
 
-with tempfile.TemporaryDirectory() as dir:
+conn = connect()
 
-    print("Using {} as the temp dir".format(dir))
+conn.storeFile('disc', os.path.join(
+    'public_html', 'django.cgi'), io.BytesIO(str.encode(cgi_install)))
 
-    os.chdir(dir)
+try:
+    contents = urllib.request.urlopen(
+        "https://engineering.purdue.edu/earlybirdsystem").read()
+except:
+    pass
 
-    # run pip to get all the files
-    completed = subprocess.run(['pip', 'install', '--target=.', '--ignore-installed',
-                                '--only-binary=:all:', '--python-version=34', '--no-deps', '--upgrade', sys.argv[1]], cwd=dir)
+time.sleep(20)
 
-    if completed.returncode != 0:
-        print("Bad retcode from pip")
-        exit(1)
-
-    # copy all the files to the server
-    conn = connect()
-
-    foldername = sys.argv[1].partition('=')[0]
-
-    copy_dir(conn, foldername,
-             os.path.join('public_html', 'deps'))
+conn.storeFile('disc', 'public_html/django.cgi', open('django.cgi', 'rb'))
