@@ -98,6 +98,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'earlybird.User'
+
+LOGIN_REDIRECT_URL = '{}/account'.format(
+    '/earlybirdsystem' if os.environ.get('EARLYBIRD_ON_ECN') else '')
+
+LOGIN_URL = '{}/login'.format(
+    '/earlybirdsystem' if os.environ.get('EARLYBIRD_ON_ECN') else '')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

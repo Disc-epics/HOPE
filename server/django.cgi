@@ -67,6 +67,7 @@ def run_with_cgi(application):
 
 try:
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "earlybird.settings")
+    os.environ.setdefault('EARLYBIRD_ON_ECN', '1')
     sys.path.append(os.path.join(WWW_PATH, 'deps'))
     import django.core.wsgi
     run_with_cgi(django.core.wsgi.get_wsgi_application())
