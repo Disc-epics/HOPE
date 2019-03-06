@@ -30,7 +30,7 @@ function validate(ev) {
     }
 
     if (check_validate === true) {
-        link_login.setAttribute('href', "./client_list.html");
+        link_login.setAttribute('href', "./alerts.html");
     } else {
         // const paragraph = document.createElement("p");
         // const text = document.createTextNode("Sorry, the password you entered is incorrect, try again!");
