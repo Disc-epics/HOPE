@@ -5,9 +5,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-def sendNotification(toaddr, subject, message):
+def send_email(toaddr, subject, message):
 
-    #Earlybird login Gmail info
+    # Earlybird login Gmail info
     fromaddr = 'earlybirdalertsystem@gmail.com'
     password = 'Earlybird!'
 
@@ -16,7 +16,7 @@ def sendNotification(toaddr, subject, message):
     msg['To'] = toaddr
     msg['Subject'] = subject
 
-    text = MIMEText(html, message)
+    text = MIMEText(message, 'html')
     msg.attach(text)
 
     try:
@@ -30,22 +30,24 @@ def sendNotification(toaddr, subject, message):
     except:
         print('Error: could not send email')
 
-def getSubject(status):
+
+def get_subject(status):
     if status is True:
         return "Alert ClientName has been arrested"
     else:
         return "ClientName has been released"
 
 
-html = """\
-    <html>
-      <body>
-        <p>Hi Caseworker name,<br>
-           Your ClientName was been release/arrested at date and time. Login to your Account for more detail.<br>
-           <a href="https://engineering.purdue.edu/earlybirdsystem">Real Python</a> 
-           For more information.
-        </p>
-      </body>
-    </html>
-    """
-sendNotification('adu.enoch@yahoo.com', "Test", html)
+def send_notification(toaddr, worker):
+    _html = """\
+      <html>
+        <body>
+          <p>Hi Caseworker name,<br>
+            Your ClientName was been release/arrested at date and time. Login to your Account for more detail.<br>
+            <a href="https://engineering.purdue.edu/earlybirdsystem">Real Python</a> 
+            For more information.
+          </p>
+        </body>
+      </html>
+      """
+    pass
