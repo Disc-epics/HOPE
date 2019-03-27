@@ -2,12 +2,13 @@ from smb.SMBConnection import SMBConnection
 from getpass import getpass
 import os
 
+from get_credentials import get_cred
+
 
 def connect():
     user = 'disc'
-    pw = os.environ.get('DISC_PASSWORD')
-    if not pw:
-        pw = getpass('disc password: ')
+    pw = os.environ.get('DISC_PASSWORD') or get_cred(
+        'ECN_PW') or getpass('disc password: ')
     conn = SMBConnection(user, pw, 'login', 'templeton.ecn.purdue.edu/disc')
 
     connected = conn.connect('128.46.104.13')
