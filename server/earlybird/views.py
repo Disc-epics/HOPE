@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, get_user_model
 
 from .models import Client, PendingUsers
-from .forms import SignupForm
+from .forms import SignupForm, AddClient
 from .send_email import send_email
 
 import uuid
@@ -39,6 +39,26 @@ def register_page(request):
     else:
         form = SignupForm()
     return render(request, 'register.html', {'form': form})
+
+@login_required
+def client_page(request):
+	if request.method == 'POST':
+		form = AddClient(request.POST)
+		if form.is_valid():
+			first_name = form.cleaned_data.get('first_name')
+			last_name = form.cleaned_data.get('last_name')
+			middle_name = form.cleaned_data.get('middle_name')
+			user = request.user
+			pending_client = Client(
+				first_name=first_name, last_name=last_name, middle_name=middle_name, user=user
+			)
+			pending_client.save()
+			# need to make html for adding client
+			#return render(request, 'client_created.html')
+			return redirect('/account/')
+	else:
+		form = AddClient()
+	return render(request, 'add_client.html', {'form': form}) 
 
 
 def confirm_user(request, uuid=None):

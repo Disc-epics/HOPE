@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.views import LoginView
 
-from earlybird.views import acct_page, register_page, confirm_user
+from earlybird.views import acct_page, register_page, confirm_user, client_page
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
@@ -29,5 +29,6 @@ urlpatterns = [
                                      redirect_authenticated_user=True)),
     path('account/', acct_page),
     path('register/', register_page),
+    path('account/create_client', client_page),
     path('confirm/<uuid>/', confirm_user)
 ] + static('/static/', document_root=os.path.join(settings.BASE_DIR, 'earlybird', 'static'))
