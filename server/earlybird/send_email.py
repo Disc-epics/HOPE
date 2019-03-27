@@ -4,12 +4,14 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+from .settings import CREDENTIALS
+
 
 def send_email(toaddr, subject, message):
 
     # Earlybird login Gmail info
     fromaddr = 'earlybirdalertsystem@gmail.com'
-    password = 'Earlybird!'
+    password = CREDENTIALS["EARLYBIRD_EMAIL_PW"]
 
     msg = MIMEMultipart()
     msg['From'] = fromaddr

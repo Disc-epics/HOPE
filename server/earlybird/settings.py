@@ -11,6 +11,19 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import json
+
+# find credentials file, either in pwd or in EALRYBIRD_CREDENTIALS_FILE
+_credentials_path = os.environ.get(
+    'EALRYBIRD_CREDENTIALS_FILE') or './creds.json'
+
+CREDENTIALS = None
+try:
+    with open(_credentials_path) as f:
+        CREDENTIALS = json.load(f)
+except FileNotFoundError:
+    raise Exception(
+        'Could not find creds.json, did you download it and put it in your `server` directory?')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'qwarmke',
         'USER': 'qwarmke',
-        'PASSWORD': os.environ.get('EARLYBIRD_DB_PASSWD'),
+        'PASSWORD': CREDENTIALS['DATABASE_PW'],
         'HOST': 'mysql.ecn.purdue.edu',
     }
 }
