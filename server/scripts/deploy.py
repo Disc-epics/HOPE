@@ -13,5 +13,6 @@ if __name__ == '__main__':
     # copy them all
     conn.storeFile('disc', 'public_html/django.cgi', open('django.cgi', 'rb'))
     conn.storeFile('disc', 'public_html/manage.py', open('manage.py', 'rb'))
+    conn.storeFile('disc', 'public_html/process_tasks.sh', open('process_tasks.sh', 'rb'))
 
     copy_dir(conn, 'earlybird', 'public_html')
