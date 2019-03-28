@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <html class="container">
 
 <head>
@@ -10,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/style.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
@@ -19,21 +17,13 @@
 
 <body class="container">
     <div class="col-sm-3 login-box my-auto">
-        <form class="form-seg" action='/login/' method='POST'>
+        <form class="form-seg" method=POST>
             {% csrf_token %}
-            <label for="username" class="form-text" value="Email">Email:</label>
-            <input name="username" id="username" class="in" type="text" value="" />
-            <br>
-            <label for="password" class="form-text" value="Password">Password:</label>
-            <input name="password" id="password" class="in" type="password" value="" />
-            <div class="row">
-                <input type='submit' class="btn btn-primary" value='Login' />
-                <a id="forgot-btn" class="btn btn-primary" href="#">Forgot Password</a>
-                <a id="register-btn" class="btn btn-primary" href="../register">Register</a>
-            </div>
-            <div class="row error" id="error_msg"></div>
+            {{ form.as_p }}
+            <button type="submit">Sign up</button>
         </form>
     </div>
+    <script src="./login.js"></script>
 </body>
 
 </html>

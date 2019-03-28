@@ -14,19 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 import os
-from django.conf.urls import url
+from django.urls import path
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.views import LoginView
-from earlybird.views import acct_page
+
+from earlybird.views import acct_page, register_page, confirm_user, client_page
 
 urlpatterns = [
-    #add this
-    url(r'^$', TemplateView.as_view(template_name='index.html')),
-    url('admin/', admin.site.urls),
-    url(r'^login/$', LoginView.as_view(template_name='login_page.html',
-                                       redirect_authenticated_user=True)),
-    url(r'^account/$', acct_page),
+    path('', TemplateView.as_view(template_name='index.html')),
+    path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view(template_name='login_page.html',
+                                     redirect_authenticated_user=True)),
+    path('account/', acct_page),
+    path('register/', register_page),
+    path('account/create_client', client_page),
+    path('confirm/<uuid>/', confirm_user)
 ] + static('/static/', document_root=os.path.join(settings.BASE_DIR, 'earlybird', 'static'))
