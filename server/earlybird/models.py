@@ -11,6 +11,7 @@ class Client(models.Model):
     last_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)
 
 
 # A user that hasn't been approved by the admin yet
