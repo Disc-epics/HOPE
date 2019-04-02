@@ -50,7 +50,13 @@
                     <center>
                         <h3 id="heading">List of People</h3>
                     </center>
-                    <ul class = "final_list" id = "final_list"></ul>
+                    <ul class = "final_list" id = "final_list">
+			{% for i in clients %}
+				<li class="list_name" onclick="update_center(event)">
+					{{ i }}
+				</li>
+			{% endfor %}
+		    </ul>
                 </div>
             </div>
 
@@ -67,7 +73,7 @@
                         <br>
                         <h2> Previous Arrests: </h2>
                         <br>
-                        <h2> Current Status: </h2>
+                        <h2 id = "profile_status"> Current Status: </h2>
                     </center>
             </div>
         </div>

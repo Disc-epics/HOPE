@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, get_user_model
+from django.http import JsonResponse
 
 from .models import Client, PendingUsers
 from .forms import SignupForm, AddClient
@@ -14,8 +15,20 @@ User = get_user_model()
 
 @login_required
 def acct_page(request):
-    clients = Client.objects.all()
-    return render(request, 'client_list.html', {'clients': clients})
+    client_list = ['{} {}'.format(c.first_name, c.last_name) for c in request.user.client_set.all()]
+    return render(request, 'client_list.html', {'clients': client_list})
+
+@login_required
+def get_status(request, client_name):
+    # Assuming NO MIDDLE NAMES for now
+    first_name = client_name.split()[0]
+    last_name = client_name.split()[1]
+    client = Client.objects.get(first_name=first_name, last_name=last_name)
+
+    data = {
+	'status' : client.status
+    }
+    return JsonResponse(data) 
 
 
 def register_page(request):
