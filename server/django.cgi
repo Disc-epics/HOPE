@@ -11,8 +11,8 @@ sys.path.append(DJANGO_PROJECT_PATH + "/earlybirdsystem")
 
 def run_with_cgi(application):
     environ = dict(os.environ.items())
-    environ['wsgi.input'] = sys.stdin
-    environ['wsgi.errors'] = sys.stderr
+    environ['wsgi.input'] = sys.stdin.buffer
+    environ['wsgi.errors'] = sys.stderr.buffer
     environ['wsgi.version'] = (1, 0)
     environ['wsgi.multithread'] = False
     environ['wsgi.multiprocess'] = True
