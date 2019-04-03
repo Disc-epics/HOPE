@@ -16,14 +16,14 @@ User = get_user_model()
 @login_required
 def acct_page(request):
     client_list = ['{} {}'.format(c.first_name, c.last_name) for c in request.user.client_set.all()]
-    return render(request, 'client_list.html', {'clients': client_list})
+    return render(request, 'client_list.html', {'clients': client_list, 'username' : request.user.username})
 
 @login_required
 def get_status(request, client_name):
     # Assuming NO MIDDLE NAMES for now
     first_name = client_name.split()[0]
     last_name = client_name.split()[1]
-    client = Client.objects.get(first_name=first_name, last_name=last_name)
+    client = request.user.client_set.get(first_name=first_name, last_name=last_name)
 
     data = {
 	'status' : client.status
