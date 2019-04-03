@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, get_user_model
 from django.http import JsonResponse
+from django.contrib.auth import logout
+from django.conf import settings
 
 from .models import Client, PendingUsers
 from .forms import SignupForm, AddClient
@@ -12,6 +14,10 @@ import random
 
 User = get_user_model()
 
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page
+    return redirect('{}/'.format(settings.PREFIX))
 
 @login_required
 def acct_page(request):

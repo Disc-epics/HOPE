@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.views import LoginView
 
-from earlybird.views import acct_page, register_page, confirm_user, client_page, get_status
+from earlybird.views import acct_page, register_page, confirm_user, client_page, get_status, logout_view
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
@@ -33,5 +33,6 @@ urlpatterns = [
     path('register/', register_page),
     path('client_status/<client_name>', get_status),
     path('account/create_client', client_page),
-    path('confirm/<uuid>/', confirm_user)
+    path('confirm/<uuid>/', confirm_user),
+    path('account/logout', logout_view)
 ] + static('/static/', document_root=os.path.join(settings.BASE_DIR, 'earlybird', 'static'))
