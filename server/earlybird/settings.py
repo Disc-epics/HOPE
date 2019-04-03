@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import json
+import sys
 
 # find credentials file, either in pwd or in EALRYBIRD_CREDENTIALS_FILE
 _credentials_path = os.environ.get(
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'background_task',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -115,11 +116,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'earlybird.User'
 
-LOGIN_REDIRECT_URL = '{}/account'.format(
-    '/earlybirdsystem' if os.environ.get('EARLYBIRD_ON_ECN') else '')
+PREFIX = '/earlybirdsystem' if os.environ.get(
+    'EARLYBIRD_ON_ECN') == '1' else ''
 
-LOGIN_URL = '{}/login'.format(
-    '/earlybirdsystem' if os.environ.get('EARLYBIRD_ON_ECN') else '')
+LOGIN_REDIRECT_URL = '{}/account'.format(PREFIX)
+LOGIN_URL = '{}/login'.format(PREFIX)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
