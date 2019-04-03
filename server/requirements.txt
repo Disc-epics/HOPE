@@ -3,3 +3,4 @@ pysmb==1.1.27
 twilio==6.24.1
 mysqlclient==1.3.14
 pytz==2018.9
+django-background-tasks==1.2.0
