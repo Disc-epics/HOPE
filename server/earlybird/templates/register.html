@@ -20,7 +20,10 @@
         <form class="form-seg" method=POST>
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Sign up</button>
+            <div class="row">
+                <a type="submit" class="btn btn-primary">Sign up</a>
+                <a id="back-btn" class="btn btn-primary" href="./login">Back</a>
+            </div>
         </form>
     </div>
     <script src="./login.js"></script>
