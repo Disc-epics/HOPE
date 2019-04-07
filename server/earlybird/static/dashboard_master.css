@@ -1,0 +1,200 @@
+body {
+  font-family: 'Raleway';
+  font-size: 2em;
+}
+
+.navbar {
+    font-family: Montserrat, sans-serif;
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity: 0.8;
+  }
+
+  .caseworker {
+    margin-top: 60px;
+  }
+  
+  .nav.navbar-nav.pull-right li a
+  {
+      color: white;
+  }
+  
+  .nav.navbar-nav.pull-right > li > a:hover
+  {
+      background-color: black;
+  }
+  
+  h1
+  {
+      opacity: 0.8;
+      color: black;
+      font-size: 300%;
+  }
+  
+  button
+  {
+      height: 55px;
+      width: 200px;
+    }
+    .button {
+    display: inline-block;
+    border: none;
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  
+  
+   .btn {
+    display: inline-block;
+    border: none;
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    padding-bottom: 130px;
+  }
+  
+  .btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  
+  .btn span:after {
+    content: '\00ab';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -20px;
+    transition: 0.5s;
+  }
+  
+  .btn:hover span {
+    padding-left: 25px;
+  }
+  
+  .btn:hover span:after {
+    opacity: 1;
+    left: 0;
+  }
+  @keyframes swing {
+    20% {
+      transform: rotate3d(0, 0, 1, 15deg);
+    }
+  
+    40% {
+      transform: rotate3d(0, 0, 1, -10deg);
+    }
+  
+    60% {
+      transform: rotate3d(0, 0, 1, 5deg);
+    }
+  
+    80% {
+      transform: rotate3d(0, 0, 1, -5deg);
+    }
+  
+    to {
+      transform: rotate3d(0, 0, 1, 0deg);
+    }
+  }
+  
+  
+  .animated {
+    animation-duration: 3s;
+    animation-fill-mode: both;
+  }
+  
+  .animated.infinite {
+    animation-iteration-count: infinite;
+  }
+  
+  .animated.hinge {
+    animation-duration: 2s;
+  }
+  
+  .animated.flipOutX,
+  .animated.flipOutY,
+  .animated.bounceIn,
+  .animated.bounceOut {
+    animation-duration: .75s;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fadeIn {
+    animation-name: fadeIn;
+  }
+
+  nav li {
+    font-family: raleway;
+    font-weight: 500;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+nav a {
+    padding-left: 0px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 2px;
+  margin-left: 3px;
+}
+
+footer .text{
+  float: right;
+}
