@@ -54,8 +54,10 @@ def register_page(request):
                 email=email, first_name=first_name, last_name=last_name, key=key)
             pending_user.save()
 
-            send_email('russellgreene8@gmail.com', 'Is good?',
-                       'Is good? {0} with email {1} <br /> <a href={2}>{2}</a>'.format(first_name, email, "http://localhost:8000/confirm/{}".format(key)))
+            send_email('russellgreene8@gmail.com', 'Confirm registration for {} {}'.format(first_name, last_name),
+                       'User {first} {last} ({email} has requested access to earlybird. <br />'
+                       'If you do not recognize this, no action is required. If you would like to activate thier account, click the link below. <br /><br />'
+                       '<a href={url}>{url}</a>'.format(first=first_name, last=last_name, email=email, url="http://engineering.purdue.edu/earlybirdsystem/confirm/{}".format(key)))
 
             return render(request, 'request_received.html')
     else:
