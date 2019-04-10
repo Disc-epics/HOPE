@@ -3,6 +3,10 @@ body {
   font-size: 2em;
 }
 
+header {
+  all: none;
+}
+
 .navbar {
     font-family: Montserrat, sans-serif;
     margin-bottom: 0;
