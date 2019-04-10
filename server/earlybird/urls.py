@@ -33,6 +33,6 @@ urlpatterns = [
     path('client_status/<client_name>', get_status),
     path('account/create_client', client_page),
     path('confirm/<uuid>/', confirm_user),
-    path('account/logout', logout_view)
+    path('account/logout', logout_view),
     path('account/settings', settings_page),
 ] + static('/static/', document_root=os.path.join(settings.BASE_DIR, 'earlybird', 'static'))
