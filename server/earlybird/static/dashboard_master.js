@@ -15,12 +15,11 @@ const template = `
     </div>
 `;
 
-test = document.getElementById("add_template")
-console.log(test)
+test = document.getElementById("add_template");
+console.log(test);
 
-for(var i =0 ;i < 6; i= i + 1){
-    span = document.createElement('span')
-    span.innerHTML = template
-    test.append(span)
+for (var i = 0; i < 6; i = i + 1) {
+  span = document.createElement("span");
+  span.innerHTML = template;
+  test.append(span);
 }
-
