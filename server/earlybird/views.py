@@ -109,3 +109,8 @@ def confirm_user(request, uuid=None):
             'name': '{} {}'.format(pending_user.first_name, pending_user.last_name),
             'email': pending_user.email,
         })
+
+
+@login_required
+def settings_page(request):
+    return render(request, 'acct_settings.html')
