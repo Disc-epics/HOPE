@@ -1,133 +1,135 @@
 body {
-    background: #333;
-    color: white;
-    font-family: raleway;
+  background: #333;
+  color: white;
+  font-family: raleway;
 }
 
 .profile {
-    width: auto;
-    font-family: Raleway ,Helvetica, sans-serif;
+  width: auto;
+  font-family: Raleway, Helvetica, sans-serif;
 }
 
 .image {
-    border-radius: 100%;
+  border-radius: 100%;
+  max-height: 30vh;
+  max-width: 30vh;
 }
 
 #heading {
-    padding-top: 2px;
+  padding-top: 2px;
 }
 
 .homeless_list {
-    box-shadow: 0px 5px 5px 0px black;
-    width: 30%;
-    float: left;
-    color: white;
+  box-shadow: 0px 5px 5px 0px black;
+  width: 30%;
+  float: left;
+  color: white;
 }
 
-.homeless_list h3{
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    font-family: righteous;
-    font-weight: 300;
-    letter-spacing: 3px;
-    margin: 20px 2rem;
+.homeless_list h3 {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-family: righteous;
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin: 20px 2rem;
 }
 
 .main ul {
-    list-style: none;
-    padding: 0;
-    overflow-y: scroll;
-    height: calc(100vh - 72px);
+  list-style: none;
+  padding: 0;
+  overflow-y: scroll;
+  height: calc(100vh - 72px);
 }
 
 .final-list {
-    box-shadow: 0px 0px 5px 0px black; 
-    list-style: none;
-    margin-top: 1em;
-    padding: 0;
-    width: 100%;
-    color:#999;
+  box-shadow: 0px 0px 5px 0px black;
+  list-style: none;
+  margin-top: 1em;
+  padding: 0;
+  width: 100%;
+  color: #999;
 }
 
-.list_name{
-    text-align: center;
-    font-size: 120%;
-    font-family: Raleway ,Helvetica, sans-serif;
-    text-transform: uppercase;
-    color: black;
-    border-radius: 10px;
-    box-shadow: 0px 5px 5px 0px black;
-    text-shadow: 1px 1px black;
-    cursor: pointer;
-    padding-bottom: 20px;
-    padding-top: 20px; 
-    background-color: grey; 
-    margin-top: 10px;
-    margin-bottom: 5px;
+.list_name {
+  text-align: center;
+  font-size: 120%;
+  font-family: Raleway, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0px 5px 5px 0px black;
+  text-shadow: 1px 1px black;
+  cursor: pointer;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background-color: grey;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
-.names{
-    width: auto;
-    height: auto;  
+.names {
+  width: auto;
+  height: auto;
 }
 
-footer .text{
-    float: right;
+footer .text {
+  float: right;
 }
 
 .btn.btn-primary {
-    font: white;
-    border: 2em;
-    background-color: black;
-    opacity: 0.5;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+  font: white;
+  border: 2em;
+  background-color: black;
+  opacity: 0.5;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
 }
 
 .btn.btn-primary:hover {
-    background-color: white;
-    color: black;
-} 
+  background-color: white;
+  color: black;
+}
 
 .btn.btn-primary:active {
-    background-color: beige;
-    color: black;
+  background-color: beige;
+  color: black;
 }
 
 .logout {
-    margin-right: 10px;   
+  margin-right: 10px;
 }
 
 nav .item:hover {
-    color: gray;
+  color: gray;
 }
 
 nav .item::before {
-    content: '';
-    display: block;
-    height: 2px;
-    background-color: whitesmoke;
-    position: relative;
-    top: 0;
-    width: 0%;
-    transition: all ease-in-out 250ms;
+  content: "";
+  display: block;
+  height: 2px;
+  background-color: whitesmoke;
+  position: relative;
+  top: 0;
+  width: 0%;
+  transition: all ease-in-out 250ms;
 }
 
 nav .item:hover::before {
-    width: 100%;
+  width: 100%;
 }
 
 @media (max-width: 560px) {
-    .homeless_list {
-        width: 100%;
-    }
+  .homeless_list {
+    width: 100%;
+  }
 
-    .profile {
-        background: #333;
-        color: white;
-        font-size: 0.8 em;
-    }
+  .profile {
+    background: #333;
+    color: white;
+    font-size: 0.8 em;
+  }
 
-    #profile {
-        display: none;
-    }
+  #profile {
+    display: none;
+  }
 }
