@@ -74,7 +74,7 @@ body {
 }
 
 footer .text {
-  float: right;
+  float: left;
 }
 
 .btn.btn-primary {
