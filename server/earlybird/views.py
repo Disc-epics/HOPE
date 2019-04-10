@@ -87,28 +87,33 @@ def client_page(request):
 
 
 def confirm_user(request, uuid=None):
-    pending_user = PendingUsers.objects.get(key=uuid)
-    if pending_user:
-        # give them a password
-        password_chars = 'abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?'
-        password = ''.join(random.sample(password_chars, 8))
+    try:
+        pending_user = PendingUsers.objects.get(key=uuid)
+    except PendingUsers.DoesNotExist:
+        return render(request, 'invalid_confirm_url.html')
+    # give them a password
+    password_chars = 'abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?'
+    password = ''.join(random.sample(password_chars, 8))
 
-        # create the user
-        new_user = User.objects.create_user(first_name=pending_user.first_name,
-                                            last_name=pending_user.last_name,
-                                            username=pending_user.email,
-                                            email=pending_user.email, password=password)
+    # create the user
+    new_user = User.objects.create_user(first_name=pending_user.first_name, last_name=pending_user.last_name,
+                                        username=pending_user.email, email=pending_user.email, phone_number=pending_user.phone_number, password=password)
 
-        new_user.save()
+    new_user.save()
 
-        # email the new user
-        send_email(pending_user.email, 'Your earlybird account has been activated!',
-                   'Your password is {}'.format(password))
+    # email the new user
+    send_email(pending_user.email, 'Your earlybird account has been activated!',
+               'Welcome to earlybird, {first} {last}! <br />'
+               'Your password is {password} <br />'
+               '<a href="{url}">Click this link to change your password</a>'
+               ''.format(first=pending_user.first_name, last=pending_user.last_name, password=password, url='http://engineering.purdue.edu/account/change_password'))
 
-        return render(request, 'user_created.html', {
-            'name': '{} {}'.format(pending_user.first_name, pending_user.last_name),
-            'email': pending_user.email,
-        })
+    pending_user.delete()
+
+    return render(request, 'user_created.html', {
+        'name': '{} {}'.format(pending_user.first_name, pending_user.last_name),
+        'email': pending_user.email,
+    })
 
 
 @login_required
