@@ -12,6 +12,7 @@ class Client(models.Model):
     middle_name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.BooleanField(default=False)
+    phone_number = models.CharField(max_length=100)
 
 
 # A user that hasn't been approved by the admin yet
@@ -20,3 +21,4 @@ class PendingUsers(models.Model):
     email = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=100)
