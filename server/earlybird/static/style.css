@@ -14,6 +14,11 @@
     font-family: Raleway ,Helvetica, sans-serif;
 }
 
+label {
+    font-size: 1em;
+    font-family: Raleway ,Helvetica, sans-serif;
+}
+
 .login-box.col-sm-3 {
     min-height: 550px;
     min-width: 800px;
