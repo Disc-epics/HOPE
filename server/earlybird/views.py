@@ -95,7 +95,7 @@ def client_page(request):
             pending_client.save()
             # need to make html for adding client
             # return render(request, 'client_created.html')
-            return redirect('/account/')
+            return redirect('{}/account/'.format(settings.PREFIX))
     else:
         form = AddClient()
     return render(request, 'add_client.html', {'form': form})
