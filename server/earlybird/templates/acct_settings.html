@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function deleteAccount() {
+            request = new XMLHttpRequest();
+
+            accountUrl = window.location.href.split("/").slice(0, -2).join("/");
+            request.open('DELETE', `${accountUrl}/`);
+            request.send();
+        }
+    </script>
+</head>
+
+<body>
+    Change Password:
+    <form action="./change_password" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign up</button>
+    </form>
+    <button onclick="deleteAccount()">Delete Account</button>
+</body>
+
+</html>
