@@ -27,7 +27,7 @@
       href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../static/client_list.css" />
+    <link rel="stylesheet" href="{{prefix}}/static/client_list.css" />
     <!-- <link rel = "stylesheet" href = "../static/client_list.css"> -->
   </head>
 
@@ -44,19 +44,23 @@
               >
             </li>
             <li class="nav-item">
+              {% if not snooping %}
               <a
                 class="nav-link"
                 href="./create_client"
                 tabindex="-1"
                 aria-disabled="true"
               >
+              {% endif %}
                 <div class="item">Add New Client</div>
               </a>
             </li>
           </ul>
         </div>
+        {% if not snooping %}
         <a href="#" class="logout btn btn-primary ml-auto">Settings</a>
         <a href="./logout" class="logout btn btn-primary ml-auto">Logout</a>
+        {% endif %}
         <button
           class="navbar-toggler"
           data-target="#my-nav"
@@ -95,7 +99,7 @@
           <h2>Profile</h2>
           <br />
           <br />
-          <img src="../static/images/pic.png" class="image" />
+          <img src="{{prefix}}/static/images/pic.png" class="image" />
           <br />
           <br />
           <h2 id="profile_name">Name:</h2>
@@ -115,13 +119,13 @@
           <div class="text">Earlybird Alert System</div>
           <img
             style="max-width: 15%; max-height: 5%; float: right;"
-            src="../static/images/epics_logo.png"
+            src="{{prefix}/static/images/epics_logo.png"
           />
         </div>
       </div>
     </footer>
 
-    <script src="../static/client_list.js"></script>
+    <script src="{{prefix}/static/client_list.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

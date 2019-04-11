@@ -23,16 +23,18 @@ def logout_view(request):
 def acct_page(request):
     client_list = ['{} {}'.format(c.first_name, c.last_name)
                    for c in request.user.client_set.all()]
-    client_list.sort(key=lambda x: x.split(" ")[-1]) # sorting by last names
-    return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username})
+    client_list.sort(key=lambda x: x.split(" ")[-1])  # sorting by last names
+    return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username, 'prefix': settings.PREFIX, 'snooping': False})
+
 
 @login_required
 def master_snoop(request, email):
     user = User.objects.get(email=email)
     client_list = ['{} {}'.format(c.first_name, c.last_name)
                    for c in user.client_set.all()]
-    client_list.sort(key=lambda x: x.split(" ")[-1]) # sorting by last names
-    return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username})
+    client_list.sort(key=lambda x: x.split(" ")[-1])  # sorting by last names
+    return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username, 'prefix': settings.PREFIX, 'snooping': True})
+
 
 @login_required
 def master_page(request):
