@@ -23,8 +23,11 @@ def logout_view(request):
 
 @login_required
 def acct_page(request):
+    if request.method == 'DELETE':
+	request.user.delete()
+        return redirect(settings.PREFIX)
     client_list = ['{} {}'.format(c.first_name, c.last_name)
-                   for c in request.user.client_set.all()]
+		   for c in request.user.client_set.all()]
     client_list.sort(key=lambda x: x.split(" ")[-1])  # sorting by last names
     return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username, 'prefix': settings.PREFIX, 'snooping': False})
 
