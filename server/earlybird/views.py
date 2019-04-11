@@ -14,10 +14,12 @@ import random
 
 User = get_user_model()
 
+
 def logout_view(request):
     logout(request)
     # Redirect to a success page
     return redirect('{}/'.format(settings.PREFIX))
+
 
 @login_required
 def acct_page(request):
@@ -39,7 +41,7 @@ def master_snoop(request, email):
 @login_required
 def master_page(request):
     user_list = [('{} {}'.format(u.first_name, u.last_name), u.email)
-		for u in User.objects.all()]
+                 for u in User.objects.all()]
     return render(request, 'dashboard_master.html', {'users': user_list})
 
 
@@ -48,7 +50,7 @@ def get_status(request, client_name):
     # Assuming NO MIDDLE NAMES for now
     first_name = client_name.split()[0]
     last_name = client_name.split()[1]
-    client = request.user.client_set.get(
+    client = Client.objects.get(
         first_name=first_name, last_name=last_name)
 
     data = {
@@ -64,16 +66,17 @@ def register_page(request):
             email = form.cleaned_data.get('email')
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
+            phone_number = form.cleaned_data.get('phone_number')
 
             # generate a UUID to be in the email
             key = str(uuid.uuid4())
             pending_user = PendingUsers(
-                email=email, first_name=first_name, last_name=last_name, key=key)
+                email=email, first_name=first_name, last_name=last_name, phone_number=phone_number, key=key)
             pending_user.save()
 
             send_email('russellgreene8@gmail.com', 'Confirm registration for {} {}'.format(first_name, last_name),
-                       'User {first} {last} ({email} has requested access to earlybird. <br />'
-                       'If you do not recognize this, no action is required. If you would like to activate thier account, click the link below. <br /><br />'
+                       'User {first} {last} ({email}) has requested access to earlybird. <br />'
+                       'If you do not recognize this potential user, no action is required. If you would like to activate thier account, click the link below. <br /><br />'
                        '<a href={url}>{url}</a>'.format(first=first_name, last=last_name, email=email, url="http://engineering.purdue.edu/earlybirdsystem/confirm/{}".format(key)))
 
             return render(request, 'request_received.html')
