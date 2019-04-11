@@ -10,7 +10,7 @@ function update_center(ev) {
   }
   xmlHttp.open("GET",
                [
-                 pathname.slice(0, num_to_splice), 'client_status',
+                 ... pathname.slice(0, num_to_splice), 'client_status',
                  ev.target.textContent.trim()
                ]
                    .join('/'),
