@@ -8,6 +8,7 @@ from django.conf import settings
 from .models import Client, PendingUsers
 from .forms import SignupForm, AddClient, ChangePassword
 from .send_email import send_email
+from .web_scraper import run_check
 
 import uuid
 import random
@@ -20,6 +21,7 @@ def logout_view(request):
     # Redirect to a success page
     return redirect(settings.PREFIX)
 
+
 @login_required
 def acct_page(request):
     if request.method == 'DELETE':
@@ -30,10 +32,12 @@ def acct_page(request):
     client_list.sort(key=lambda x: x.split(" ")[-1])  # sorting by last names
     return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username, 'prefix': settings.PREFIX, 'snooping': False})
 
+
 def master_remove(request, email):
-     user = User.objects.get(email=email)
-     user.delete()
-     return redirect("{}master".format(settings.PREFIX))
+    user = User.objects.get(email=email)
+    user.delete()
+    return redirect("{}master".format(settings.PREFIX))
+
 
 @login_required
 def master_snoop(request, email):
@@ -67,20 +71,21 @@ def get_status(request, client_name):
     }
     return JsonResponse(data)
 
+
 def change_password(request):
     if request.method == 'POST':
         form = ChangePassword(request.POST)
         if form.is_valid():
-             password = form.cleaned_data.get('password')
-             password2 = form.cleaned_data.get('password2')
-             if password == password2:
-                  user = request.user
-                  user.set_password(password)
-                  user.save()
-             else:
-                  return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': True})
+            password = form.cleaned_data.get('password')
+            password2 = form.cleaned_data.get('password2')
+            if password == password2:
+                user = request.user
+                user.set_password(password)
+                user.save()
+            else:
+                return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': True})
     return redirect('{}account'.format(settings.PREFIX))
- 
+
 
 def register_page(request):
     if request.method == 'POST':
@@ -92,8 +97,8 @@ def register_page(request):
             phone_number = form.cleaned_data.get('phone_number')
             client_list = [c.email for c in User.objects.all()]
             if email in client_list:
-                 return render(request, 'register.html', {'form': SignupForm(), 'invalid_login': True})
-                 
+                return render(request, 'register.html', {'form': SignupForm(), 'invalid_login': True})
+
             # generate a UUID to be in the email
             key = str(uuid.uuid4())
             pending_user = PendingUsers(
@@ -165,3 +170,7 @@ def confirm_user(request, uuid=None):
 @login_required
 def settings_page(request):
     return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False})
+
+
+def scrape_page(request):
+    run_check()
