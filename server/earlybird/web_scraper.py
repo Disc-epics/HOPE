@@ -7,6 +7,7 @@ import threading
 from earlybird.models import Client
 from . import send_email
 from . import send_text
+from earlybird.celery import app
 #######################################################
 clients = Client.objects.all()
 
@@ -40,11 +41,12 @@ def scrapeSite():
 def checkStatus(inmatesNames, clients):
     for client in clients:    
         if (client.first_name, client.last_name) in inmatesNames and client.status == False:
-            body = client.first_name + ' ' + client.last_name + ' was arrested.\n For more details click here https://engineering.purdue.edu/earlybirdsystem/ \n Earlybird Systems'
+            emailBody = client.first_name + ' ' + client.last_name + ' was arrested.<br>For more details click here https://engineering.purdue.edu/earlybirdsystem/ </br> <br>Earlybird Systems</br>'
+            textBody = client.first_name + ' ' + client.last_name + ' was arrested. For more details click here https://engineering.purdue.edu/earlybirdsystem/ Earlybird Systems'
             if client.user.email:
-                send_email.send_email(client.user.email, 'Client Status Update', 'Your client ' + body)
+                send_email.send_email(client.user.email, 'Client Status Update', 'Your client ' + emailBody)
             if client.user.phone_number:
-                send_text.send_text(client.user.phone_number, body)
+                send_text.send_text(client.user.phone_number, textBody)
             client.status = True
             client.save()
         elif client.status == True and (client.first_name, client.last_name) not in inmatesNames:
@@ -54,10 +56,6 @@ def checkStatus(inmatesNames, clients):
             send_email.send_email(client.user.email, 'Client Status Update', body)
             send_text.send_text(client.user.phone_number, body)
 
-    
 def run_check():
-    threading.Timer(60*30, run_check).start()
     inmatesNames = scrapeSite()
-    checkStatus(inmatesNames, clients)
-     
-run_check()    
+    checkStatus(inmatesNames, clients) 
