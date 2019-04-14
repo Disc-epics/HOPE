@@ -33,6 +33,9 @@
             </div>
             <div class="row error" id="error_msg"></div>
         </form>
+        {% if forms.errors %}
+             Your username and password didn't match. Please try again.
+        {% endif %}
     </div>
 </body>
 

@@ -20,7 +20,6 @@ def logout_view(request):
     # Redirect to a success page
     return redirect('{}/'.format(settings.PREFIX))
 
-
 @login_required
 def acct_page(request):
     if request.method == 'DELETE':
@@ -61,6 +60,20 @@ def get_status(request, client_name):
     }
     return JsonResponse(data)
 
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePassword(request.POST)
+        if form.is_valid():
+             password = form.cleaned_data.get('password')
+             password2 = form.cleaned_data.get('password2')
+             if password == password2:
+                  user = request.user
+                  user.set_password(password)
+                  user.save()
+             else:
+                  return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': True})
+    return redirect('{}account'.format(settings.PREFIX))
+ 
 
 def register_page(request):
     if request.method == 'POST':
@@ -141,4 +154,4 @@ def confirm_user(request, uuid=None):
 
 @login_required
 def settings_page(request):
-    return render(request, 'acct_settings.html', {'form': ChangePassword()})
+    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False})
