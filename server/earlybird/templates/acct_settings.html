@@ -20,6 +20,9 @@
         {{ form.as_p }}
         <button type="submit">Change Password</button>
     </form>
+    {% if badpassword %}
+        Passwords do not match
+    {% endif %}
     <button onclick="deleteAccount()">Delete Account</button>
 </body>
 

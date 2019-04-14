@@ -7,6 +7,9 @@ from django.conf import settings
 from .models import Client, PendingUsers
 from .forms import SignupForm, AddClient, ChangePassword
 from .send_email import send_email
+
+from .web_scraper import run_check
+
 import uuid
 import random
 
@@ -18,7 +21,7 @@ User = get_user_model()
 def logout_view(request):
     logout(request)
     # Redirect to a success page
-    return redirect('{}/'.format(settings.PREFIX))
+    return redirect(settings.PREFIX)
 
 
 @login_required
@@ -32,13 +35,22 @@ def acct_page(request):
     return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username, 'prefix': settings.PREFIX, 'snooping': False})
 
 
+def master_remove(request, email):
+    user = User.objects.get(email=email)
+    user.delete()
+    return redirect("{}master".format(settings.PREFIX))
+
+
 @login_required
 def master_snoop(request, email):
     user = User.objects.get(email=email)
     client_list = ['{} {}'.format(c.first_name, c.last_name)
                    for c in user.client_set.all()]
     client_list.sort(key=lambda x: x.split(" ")[-1])  # sorting by last names
-    return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username, 'prefix': settings.PREFIX, 'snooping': True})
+    return render(request, 'client_list.html', {
+        'clients': client_list,
+        'username': request.user.username,
+        'prefix': settings.PREFIX, 'snooping': True, 'caseworker_name': '{} {}'.format(user.first_name, user.last_name)})
 
 
 @login_required
@@ -62,6 +74,21 @@ def get_status(request, client_name):
     return JsonResponse(data)
 
 
+def change_password(request):
+    if request.method == 'POST':
+        form = ChangePassword(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data.get('password')
+            password2 = form.cleaned_data.get('password2')
+            if password == password2:
+                user = request.user
+                user.set_password(password)
+                user.save()
+            else:
+                return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': True})
+    return redirect('{}account'.format(settings.PREFIX))
+
+
 def register_page(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -70,6 +97,9 @@ def register_page(request):
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
             phone_number = form.cleaned_data.get('phone_number')
+            client_list = [c.email for c in User.objects.all()]
+            if email in client_list:
+                return render(request, 'register.html', {'form': SignupForm(), 'invalid_login': True})
 
             # generate a UUID to be in the email
             key = str(uuid.uuid4())
@@ -85,7 +115,7 @@ def register_page(request):
             return render(request, 'request_received.html')
     else:
         form = SignupForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'register.html', {'form': form, 'invalid_login': False})
 
 
 @login_required
@@ -103,7 +133,7 @@ def client_page(request):
             pending_client.save()
             # need to make html for adding client
             # return render(request, 'client_created.html')
-            return redirect('{}/account/'.format(settings.PREFIX))
+            return redirect('{}account/'.format(settings.PREFIX))
     else:
         form = AddClient()
     return render(request, 'add_client.html', {'form': form})
@@ -141,4 +171,8 @@ def confirm_user(request, uuid=None):
 
 @login_required
 def settings_page(request):
-    return render(request, 'acct_settings.html', {'form': ChangePassword()})
+    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False})
+
+
+def scrape_page(request):
+    run_check()
