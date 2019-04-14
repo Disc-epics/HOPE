@@ -4,13 +4,13 @@ from django.contrib.auth import authenticate, get_user_model
 from django.http import JsonResponse
 from django.contrib.auth import logout
 from django.conf import settings
-
 from .models import Client, PendingUsers
 from .forms import SignupForm, AddClient
 from .send_email import send_email
-
 import uuid
 import random
+
+import web_scraper.py
 
 User = get_user_model()
 
