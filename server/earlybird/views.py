@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.contrib.auth import logout
 from django.conf import settings
 from .models import Client, PendingUsers
-from .forms import SignupForm, AddClient
+from .forms import SignupForm, AddClient, ChangePassword
 from .send_email import send_email
 import uuid
 import random
@@ -23,6 +23,9 @@ def logout_view(request):
 
 @login_required
 def acct_page(request):
+    if request.method == 'DELETE':
+        request.user.delete()
+        return redirect(settings.PREFIX)
     client_list = ['{} {}'.format(c.first_name, c.last_name)
                    for c in request.user.client_set.all()]
     client_list.sort(key=lambda x: x.split(" ")[-1])  # sorting by last names
@@ -138,4 +141,4 @@ def confirm_user(request, uuid=None):
 
 @login_required
 def settings_page(request):
-    return render(request, 'acct_settings.html')
+    return render(request, 'acct_settings.html', {'form': ChangePassword()})

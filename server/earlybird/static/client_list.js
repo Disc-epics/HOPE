@@ -5,12 +5,12 @@ function update_center(ev) {
   var xmlHttp = new XMLHttpRequest();
   pathname = window.location.pathname.split('/');
   let num_to_splice = -3;
-  if (pathname[-1] == 'account') {
+  if (pathname[pathname.length - 2] == 'account') {
     num_to_splice = -2;
   }
   xmlHttp.open("GET",
                [
-                 pathname.slice(0, num_to_splice), 'client_status',
+                 ... pathname.slice(0, num_to_splice), 'client_status',
                  ev.target.textContent.trim()
                ]
                    .join('/'),
