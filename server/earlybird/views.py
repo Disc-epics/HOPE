@@ -18,7 +18,7 @@ User = get_user_model()
 def logout_view(request):
     logout(request)
     # Redirect to a success page
-    return redirect('{}/'.format(settings.PREFIX))
+    return redirect(settings.PREFIX)
 
 
 @login_required
@@ -38,7 +38,10 @@ def master_snoop(request, email):
     client_list = ['{} {}'.format(c.first_name, c.last_name)
                    for c in user.client_set.all()]
     client_list.sort(key=lambda x: x.split(" ")[-1])  # sorting by last names
-    return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username, 'prefix': settings.PREFIX, 'snooping': True})
+    return render(request, 'client_list.html', {
+        'clients': client_list,
+        'username': request.user.username,
+        'prefix': settings.PREFIX, 'snooping': True, 'caseworker_name': '{} {}'.format(user.first_name, user.last_name)})
 
 
 @login_required
@@ -103,7 +106,7 @@ def client_page(request):
             pending_client.save()
             # need to make html for adding client
             # return render(request, 'client_created.html')
-            return redirect('{}/account/'.format(settings.PREFIX))
+            return redirect('{}account/'.format(settings.PREFIX))
     else:
         form = AddClient()
     return render(request, 'add_client.html', {'form': form})
