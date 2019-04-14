@@ -13,8 +13,6 @@ from .web_scraper import run_check
 import uuid
 import random
 
-import web_scraper.py
-
 User = get_user_model()
 
 
