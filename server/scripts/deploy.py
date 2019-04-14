@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from smb.SMBConnection import SMBConnection
 import os
 from deploy_util import connect, copy_dir

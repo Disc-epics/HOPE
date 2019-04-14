@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.6.7
+#!/usr/bin/env python3
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -11,7 +11,7 @@ def send_email(toaddr, subject, message):
 
     # Earlybird login Gmail info
     fromaddr = 'earlybirdalertsystem@gmail.com'
-    password = CREDENTIALS["EARLYBIRD_EMAIL_PW"]
+    password = "EPICSepicsGOgo" #CREDENTIALS["EARLYBIRD_EMAIL_PW"]
 
     msg = MIMEMultipart()
     msg['From'] = fromaddr
@@ -29,6 +29,7 @@ def send_email(toaddr, subject, message):
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
+        print('Email Sent')
     except:
         print('Error: could not send email')
 

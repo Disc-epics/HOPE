@@ -1,18 +1,17 @@
-#!/usr/bin/env python2.7
-
+#!/usr/bin/env python3
 #######################################################
 #import the libraries
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import csv
-from background_task import background
+import threading
+from earlybird.models import Client
+from . import send_email
+from . import send_text
+from earlybird.celery import app
 #######################################################
-#calling scrapeSite will schedule the function to be run 60 sec from now
-previous = []
+clients = Client.objects.all()
 
-@background(schedule=1)
 def scrapeSite():
-    difference = []
     """
     Attempts to get the content on the Tippecanoe county inmate lsiting site (http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx)
     by making an HTTP GET request.
@@ -27,6 +26,7 @@ def scrapeSite():
     #parse the html using beautiful soup and store it in variable 'html_content'
     #The variable talbe contial the table branch in the html that contians current inmates information.
     data = []
+    inmatesNames = []
     html_content = BeautifulSoup(raw_html, 'html.parser')
     table = html_content.find('table', attrs={'cellspacing':'0'})
     rows = table.find_all('tr')
@@ -34,13 +34,28 @@ def scrapeSite():
         cols = row.find_all('td')
         cols = [ele.text.strip() for ele in cols]
         if cols:
-            data.append(cols)
-    print(data)
+            inmatesNames.append((cols[2].capitalize(), cols[1].capitalize()))
+            #data.append(cols)
+    return inmatesNames
+    
+def checkStatus(inmatesNames, clients):
+    for client in clients:    
+        if (client.first_name, client.last_name) in inmatesNames and client.status == False:
+            emailBody = client.first_name + ' ' + client.last_name + ' was arrested.<br>For more details click here https://engineering.purdue.edu/earlybirdsystem/ </br> <br>Earlybird Systems</br>'
+            textBody = client.first_name + ' ' + client.last_name + ' was arrested. For more details click here https://engineering.purdue.edu/earlybirdsystem/ Earlybird Systems'
+            if client.user.email:
+                send_email.send_email(client.user.email, 'Client Status Update', 'Your client ' + emailBody)
+            if client.user.phone_number:
+                send_text.send_text(client.user.phone_number, textBody)
+            client.status = True
+            client.save()
+        elif client.status == True and (client.first_name, client.last_name) not in inmatesNames:
+            body = client.first_name + ' ' + client.last_name + ' was released. For more details click here https://engineering.purdue.edu/earlybirdsystem/ \n Earlybird'
+            client.status = False
+            client.save()
+            send_email.send_email(client.user.email, 'Client Status Update', body)
+            send_text.send_text(client.user.phone_number, body)
 
-#@background(schedule=1)    
-#def run():
-#    scrapeSite()#(repeat=60*30, repeat_until=None)
-    
-#def huh():
-    #run(repeat=60*30, repeat_until=None)
-    
+def run_check():
+    inmatesNames = scrapeSite()
+    checkStatus(inmatesNames, clients) 

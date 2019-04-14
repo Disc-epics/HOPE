@@ -40,6 +40,9 @@
           <a id="back-btn" class="btn btn-primary" href="../login">Back</a>
         </div>
       </form>
+      {% if invalid_login %}
+           Email already exists
+      {% endif %}
     </div>
     <script src="./login.js"></script>
   </body>
