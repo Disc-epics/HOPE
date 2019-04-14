@@ -5,7 +5,7 @@ function update_center(ev) {
   var xmlHttp = new XMLHttpRequest();
   pathname = window.location.pathname.split('/');
   let num_to_splice = -3;
-  if (pathname[-1] == 'account') {
+  if (pathname[pathname.length - 2] == 'account') {
     num_to_splice = -2;
   }
   xmlHttp.open("GET",

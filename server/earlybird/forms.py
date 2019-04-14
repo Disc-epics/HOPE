@@ -27,3 +27,12 @@ class AddClient(forms.ModelForm):
     class Meta:
         model = Client
         fields = ('first_name', 'last_name', 'middle_name')
+
+
+class ChangePassword(forms.Form):
+    password = forms.CharField(label="Password", widget=forms.PasswordInput())
+    password2 = forms.CharField(
+        label="Confirm Password", widget=forms.PasswordInput())
+
+    class Meta:
+        fields = ('password', 'password2')
