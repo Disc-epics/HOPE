@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.views import LoginView
 
-from earlybird.views import acct_page, register_page, confirm_user, client_page, get_status, logout_view, settings_page, master_page, master_snoop, change_password
+from earlybird.views import acct_page, register_page, confirm_user, client_page, get_status, logout_view, settings_page, master_page, master_snoop, change_password, master_remove
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
@@ -37,5 +37,6 @@ urlpatterns = [
     path('account/settings', settings_page),
     path('account/change_password', change_password),
     path('master/', master_page),
+    path('master/remove_caseworker/<email>', master_remove),
     path('caseworker/<email>/', master_snoop)
 ] + static('/static/', document_root=os.path.join(settings.BASE_DIR, 'earlybird', 'static'))

@@ -30,6 +30,10 @@ def acct_page(request):
     client_list.sort(key=lambda x: x.split(" ")[-1])  # sorting by last names
     return render(request, 'client_list.html', {'clients': client_list, 'username': request.user.username, 'prefix': settings.PREFIX, 'snooping': False})
 
+def master_remove(request, email):
+     user = User.objects.get(email=email)
+     user.delete()
+     return redirect("{}master".format(settings.PREFIX))
 
 @login_required
 def master_snoop(request, email):
@@ -86,7 +90,10 @@ def register_page(request):
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
             phone_number = form.cleaned_data.get('phone_number')
-
+            client_list = [c.email for c in User.objects.all()]
+            if email in client_list:
+                 return render(request, 'register.html', {'form': SignupForm(), 'invalid_login': True})
+                 
             # generate a UUID to be in the email
             key = str(uuid.uuid4())
             pending_user = PendingUsers(
@@ -101,7 +108,7 @@ def register_page(request):
             return render(request, 'request_received.html')
     else:
         form = SignupForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'register.html', {'form': form, 'invalid_login': False})
 
 
 @login_required
