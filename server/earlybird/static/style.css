@@ -14,16 +14,54 @@
     font-family: Raleway ,Helvetica, sans-serif;
 }
 
-.login-box.col-sm-3 {
-    min-height: 550px;
-    min-width: 800px;
-    flex-wrap: wrap;
-    padding: 30px;
-    padding-top: 50px;
-    background-color: gray; 
-    margin: 50px;
-    border-radius: 10px;
-    box-shadow: 0px 5px 5px 0px black;
+@media (max-width: 800px) {
+    .login-box.login-box.col-sm-3 {
+        /* max-height: 550px; */
+        max-width: 800px;
+        flex-wrap: wrap;
+        padding: 30px;
+        padding-top: 50px;
+        background-color: gray; 
+        margin: 5px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 5px 0px black;
+    }
+
+    .btn.btn-primary {
+        font-size: 1em;
+        margin: 2px;
+        font: white;
+        padding: 5px;
+        border: 1em;
+        background-color: black;
+        opacity: 0.5;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+    }
+}
+
+@media (min-width: 700px) {
+    .login-box.col-sm-3 {
+        min-height: 550px;
+        min-width: 800px;
+        flex-wrap: wrap;
+        padding: 30px;
+        padding-top: 50px;
+        background-color: gray; 
+        margin: 50px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 5px 0px black;
+    }
+
+    .btn.btn-primary {
+        font-size: 1em;
+        margin: 20px;
+        font: white;
+        padding: 10px;
+        border: 2em;
+        background-color: black;
+        opacity: 0.5;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+    }
 }
 
 .form-seg {
@@ -39,14 +77,14 @@
     margin-bottom: 10px;
     font-family: Raleway ,Helvetica, sans-serif;
     font-size: 40px;
-    padding-inline-end: 10%;
+    padding-inline-end: 0%;
     background-color: black;
     opacity: 0.5;
     color: white;
 }
 
-.btn.btn-primary {
-    font-size: 30px;
+/* .btn.btn-primary {
+    font-size: 1em;
     margin: 20px;
     font: white;
     padding: 10px;
@@ -54,7 +92,7 @@
     background-color: black;
     opacity: 0.5;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
-}
+} */
 
 .btn.btn-primary:hover {
     background-color: white;
@@ -79,11 +117,29 @@
 }
 
 label {
-    font: white;
+    text-align: center;
+    font-family: Raleway ,Helvetica, sans-serif;
+    font-size: 50px;
+}
+
+input {
+    position: relative;
+    left: 15%;
+    right: 15%;
+    width: 70%;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    font-family: Raleway ,Helvetica, sans-serif;
+    font-size: 40px;
+    padding-inline-end: 10%;
+    background-color: black;
+    opacity: 0.5;
+    color: white;
 }
 
 .error {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 1.5rem;
+    font-family: Raleway ,Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 1rem;
     color: red;
 }

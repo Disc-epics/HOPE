@@ -33,10 +33,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ecg3k*)2rl!pmy6r1be)&2koz^u4%_-yqz!n#q0tx@u^x4mi4!'
+SECRET_KEY = CREDENTIALS['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'background_task',
 
 ]
 
@@ -121,6 +120,8 @@ PREFIX = '/earlybirdsystem/' if os.environ.get(
 
 LOGIN_REDIRECT_URL = '{}account'.format(PREFIX)
 LOGIN_URL = '{}login'.format(PREFIX)
+
+ADMIN_EMAIL = 'russellgreene8@gmail.com'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

@@ -24,7 +24,8 @@ from django.contrib.auth.views import LoginView
 from earlybird.views import acct_page, register_page, confirm_user, client_page, get_status, logout_view, settings_page, master_page, master_snoop, change_password, master_remove, scrape_page, remove_client
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html')),
+    path('', TemplateView.as_view(template_name='index.html',
+                                  extra_context={'prefix': settings.PREFIX})),
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(template_name='login_page.html',
                                      redirect_authenticated_user=True)),

@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.http import JsonResponse
 from django.contrib.auth import logout
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 from .models import Client, PendingUsers
 from .forms import SignupForm, AddClient, ChangePassword
 from .send_email import send_email
@@ -41,6 +42,11 @@ def master_remove(request, email):
 
 @login_required
 def master_snoop(request, email):
+
+    # check that you're admin
+    if request.user.email != settings.ADMIN_EMAIL:
+        raise PermissionDenied
+
     user = User.objects.get(email=email)
     client_list = ['{} {}'.format(c.first_name, c.last_name)
                    for c in user.client_set.all()]
@@ -53,6 +59,10 @@ def master_snoop(request, email):
 
 @login_required
 def master_page(request):
+    # check that you're admin
+    if request.user.email != settings.ADMIN_EMAIL:
+        raise PermissionDenied
+
     user_list = [('{} {}'.format(u.first_name, u.last_name), u.email)
                  for u in User.objects.all()]
     return render(request, 'dashboard_master.html', {'users': user_list})
@@ -105,7 +115,7 @@ def register_page(request):
                 email=email, first_name=first_name, last_name=last_name, phone_number=phone_number, key=key)
             pending_user.save()
 
-            send_email('russellgreene8@gmail.com', 'Confirm registration for {} {}'.format(first_name, last_name),
+            send_email(settings.ADMIN_EMAIL, 'Confirm registration for {} {}'.format(first_name, last_name),
                        'User {first} {last} ({email}) has requested access to earlybird. <br />'
                        'If you do not recognize this potential user, no action is required. If you would like to activate thier account, click the link below. <br /><br />'
                        '<a href={url}>{url}</a>'.format(first=first_name, last=last_name, email=email, url="http://engineering.purdue.edu/earlybirdsystem/confirm/{}".format(key)))
