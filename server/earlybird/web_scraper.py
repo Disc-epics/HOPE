@@ -7,7 +7,6 @@ import threading
 from earlybird.models import Client
 from . import send_email
 from . import send_text
-<<<<<<< HEAD
 #######################################################
 clients = Client.objects.all()
 
@@ -23,14 +22,14 @@ def scrapeSite():
     url = 'http://www3.tippecanoe.in.gov/InmateListing/InmateSearch.aspx'
     # This will return the html variable to raw_html
     raw_html = urlopen(url)
-    
-    #A list to tuples to hold current inmates names
+
+    # A list to tuples to hold current inmates names
     inmatesNames = []
-    
-    #parse the html using beautiful soup and store it in variable 'html_content'
+
+    # parse the html using beautiful soup and store it in variable 'html_content'
     html_content = BeautifulSoup(raw_html, 'html.parser')
-    
-    #The variable talbe contains the table branch in the html that contians current inmates information.
+
+    # The variable talbe contains the table branch in the html that contians current inmates information.
     table = html_content.find('table', attrs={'cellspacing': '0'})
     rows = table.find_all('tr')
     for row in rows:
@@ -39,8 +38,8 @@ def scrapeSite():
         if cols:
             inmatesNames.append((cols[2].capitalize(), cols[1].capitalize()))
     return inmatesNames
-   
-    
+
+
 def checkStatus(inmatesNames, clients):
     """
     This functions takes in the a list of all the clients in our database and checks every to see if a client is in the current inmate list.
@@ -55,22 +54,25 @@ def checkStatus(inmatesNames, clients):
                 ' was arrested. For more details click here https://engineering.purdue.edu/earlybirdsystem/ Earlybird System'
             client.status = True
             client.save()
-            #Only send an email if the caseworker provided an email 
+            # Only send an email if the caseworker provided an email
             if client.user.email:
                 send_email.send_email(
                     client.user.email, 'Client Status Update', 'Your client ' + emailBody)
-            #Only send text if caseworker provided a phone number
+            # Only send text if caseworker provided a phone number
             if client.user.phone_number:
                 send_text.send_text(client.user.phone_number, textBody)
         elif client.status == True and (client.first_name, client.last_name) not in inmatesNames:
-            emailBody = client.first_name + ' ' + client.last_name + ' was released. <br>For more details click here https://engineering.purdue.edu/earlybirdsystem/</br> <br>Earlybird System</br>'
-            textBody = client.first_name + ' ' + client.last_name + ' was released. For more details click here https://engineering.purdue.edu/earlybirdsystem/ Earlybird System
+            emailBody = client.first_name + ' ' + client.last_name + \
+                ' was released. <br>For more details click here https://engineering.purdue.edu/earlybirdsystem/</br> <br>Earlybird System</br>'
+            textBody = client.first_name + ' ' + client.last_name + ' was released. For more details click here https: // engineering.purdue.edu/earlybirdsystem / Earlybird System
             client.status = False
             client.save()
             if client.user.email:
-                send_email.send_email(client.user.email, 'Client Status Update', emailBody)
+                send_email.send_email(
+                    client.user.email, 'Client Status Update', emailBody)
             if client.user.phone_number:
                 send_text.send_text(client.user.phone_number, textBody)
+
 
 def run_check():
     inmatesNames = scrapeSite()
