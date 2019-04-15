@@ -64,7 +64,8 @@ def checkStatus(inmatesNames, clients):
         elif client.status == True and (client.first_name, client.last_name) not in inmatesNames:
             emailBody = client.first_name + ' ' + client.last_name + \
                 ' was released. <br>For more details click here https://engineering.purdue.edu/earlybirdsystem/</br> <br>Earlybird System</br>'
-            textBody = client.first_name + ' ' + client.last_name + ' was released. For more details click here https: // engineering.purdue.edu/earlybirdsystem / Earlybird System
+            textBody = client.first_name + ' ' + client.last_name + \
+                ' was released. For more details click here https: // engineering.purdue.edu/earlybirdsystem / Earlybird System'
             client.status = False
             client.save()
             if client.user.email:
