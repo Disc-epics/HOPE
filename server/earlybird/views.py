@@ -184,7 +184,7 @@ def confirm_user(request, uuid=None):
 
 @login_required
 def settings_page(request):
-    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False})
+    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False, 'username': request.user.username})
 
 
 def scrape_page(request):
@@ -223,7 +223,7 @@ def forgot_password(request):
 
             # send email
             send_email(email, 'Your earlybird password has been reset',
-                       'Your password has been reset. Your new password is {pass} <br /> <br />You can login at https://engineering.purdue.edu/earlybirdsystem/login'.format(pass=password))
+                       'Your password has been reset. Your new password is {} <br /> <br />You can login at https://engineering.purdue.edu/earlybirdsystem/login'.format(password))
 
             return redirect(settings.PREFIX)
     else:
