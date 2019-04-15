@@ -26,6 +26,7 @@ from earlybird.views import acct_page, register_page, confirm_user, client_page,
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html',
                                   extra_context={'prefix': settings.PREFIX})),
+    path('about_us/', TemplateView.as_view(template_name='about.html')),
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(template_name='login_page.html',
                                      redirect_authenticated_user=True)),
