@@ -13,8 +13,6 @@ from .web_scraper import run_check
 import uuid
 import random
 
-import web_scraper.py
-
 User = get_user_model()
 
 
@@ -176,3 +174,15 @@ def settings_page(request):
 
 def scrape_page(request):
     run_check()
+
+
+@login_required
+def remove_client(request, name):
+    first_name = name.split(' ')[0]
+    last_name = name.split(' ')[1]
+
+    # get from db
+    client = Client.objects.get(first_name=first_name, last_name=last_name)
+    client.delete()
+
+    return redirect('{}account'.format(settings.PREFIX))

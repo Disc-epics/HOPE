@@ -1,71 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>HOPE</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway" rel="stylesheet">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="../static/dashboard_master.css" />
+    <title>HOPE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/dashboard_master.css" />
 </head>
 
 <body style="background-color: #222; color: white">
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand">Brand</a>
-        <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="my-nav" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Item 1 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Item 2</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    </header>
-
     <div class="row">
-        <div class="row" >
+        <div class="row">
             <h3 class="text-center">CASE WORKER</h3>
             <br>
             <br>
         </div>
-	{% for name, email in users %}
-	<div class="col-sm-4 caseworker">
-		<p class="text-center"><strong>{{ name }}</strong></p><br>
-		<a href="#info6">
-		    <center>
-			<img src="../static/images/CaseworkerPicture.jpeg" class="img-circle person" alt={{ name }} width="255" height="255" style="width: 300px;">
-		    </center>
-		    <br>
-		</a>
+        {% for name, email in users %}
+        <div class="col-sm-4 caseworker">
+            <p class="text-center"><strong>{{ name }}</strong></p><br>
+            <a href="#info6">
+                <center>
+                    <img src="../static/images/CaseworkerPicture.jpeg" class="img-circle person" alt={{ name }}
+                        width="255" height="255" style="width: 300px;">
+                </center>
+                <br>
+            </a>
 
-		<div id="info6" class="text-center">
-		    <a href="../caseworker/{{email}}">Client List</a>
-		    <a href="./remove_caseworker/{{email}}">Remove Case Worker</a>
-		</div>
-	</div>
-	{% endfor %}
+            <div id="info6" class="text-center">
+                <a href="../caseworker/{{email}}">Client List</a>
+                <br>
+                <a href="./remove_caseworker/{{email}}">Remove Case Worker</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
     <br>
     <br>
-    <footer class="footer card-footer bg-dark fixed-bottom" style="background-color: #333333; width: 100%; padding: 5px">
+    <footer class="footer card-footer bg-dark fixed-bottom"
+        style="background-color: #333333; width: 100%; padding: 5px">
         <div class="text">Earlybird Alert System</div>
     </footer>
 
     <!-- <script src = "../static/dashboard_master.js"> </script>-->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 </body>
+
 </html>
