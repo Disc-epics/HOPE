@@ -38,10 +38,17 @@
             </a>
             {% endif %}
           </li>
+          <li class="nav-item">
+            {% if not snooping %}
+            <a class="nav-link" href="./settings" tabindex="-1" aria-disabled="true">
+              <div class="item">Settings</div>
+            </a>
+            {% endif %}
+          </li>
         </ul>
       </div>
       {% if not snooping %}
-      <a href="./settings" class="logout btn btn-primary ml-auto">Settings</a>
+      <!-- <a href="./settings" class="logout btn btn-primary ml-auto">Settings</a> -->
       <a href="./logout" class="logout btn btn-primary ml-auto">Logout</a>
       {% endif %}
       <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav"
@@ -55,14 +62,17 @@
   <br />
 
   <div class="main" id="main" style="height:100vh">
-    <div class="homeless_list" style="height: 100%; overflow: scroll;">
-      <div class="names" id="names">
+    <div class="homeless_list" style="height: 100%; overflow: visible;">
+      <div class="names" id="names" style="height: auto; overflow: visible;">
         <center>
-          <h3 id="heading">
-            List of People
-            {% if snooping %}
-            for {{caseworker_name}}
-            {% endif %}
+          <div class="heading">
+            <br>
+            <h3 style="position: fixed; font-family: righteous" id="heading">
+          </div>
+          List of People
+          {% if snooping %}
+          for {{caseworker_name}}
+          {% endif %}
           </h3>
         </center>
         <ul class="final_list" id="final_list">
@@ -71,6 +81,9 @@
             {{ i }}
           </li>
           {% endfor %}
+          <br>
+          <br>
+          <br>
         </ul>
       </div>
     </div>
@@ -88,7 +101,8 @@
         <br />
         <br />
         <h2 id="profile_status">Current Status:</h2>
-        <a id="remove_button" href='#'>Remove Client</button>
+        <br>
+        <a id="remove_button" class="logout btn btn-primary" href='#'>Remove Client</a>
       </center>
     </div>
   </div>
@@ -99,9 +113,8 @@
   <footer class="footer card-footer bg-dark fixed-bottom">
     <div class="row">
       <div class="epics-img">
-        <div class="text">Earlybird Alert System</div>
-        <img style="max-width: 15%; max-height: 10%; float: right;" src="{{prefix}}static/images/epics_logo.png" />
-
+        <div class="text"><a style="color: white" href="/">Earlybird Alert System</a></div>
+        <!-- <img style="max-width: 15%; max-height: 10%; float: right;" src="{{prefix}}static/images/epics_logo.png" /> -->
       </div>
     </div>
   </footer>

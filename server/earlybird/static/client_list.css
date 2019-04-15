@@ -99,6 +99,12 @@ footer .text {
   margin-right: 10px;
 }
 
+@media (max-width: 800px) {
+  nav .navbar-brand {
+    display: none;
+  }
+}
+
 nav .item:hover {
   color: gray;
 }
@@ -132,4 +138,12 @@ nav .item:hover::before {
   #profile {
     display: none;
   }
+}
+
+.text a {
+  text-decoration: none;
+}
+
+.text a :hover {
+  color: grey;
 }
