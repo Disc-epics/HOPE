@@ -36,3 +36,11 @@ class ChangePassword(forms.Form):
 
     class Meta:
         fields = ('password', 'password2')
+
+
+class ForgotPassword(forms.Form):
+    email = forms.CharField(
+        label="Email", widget=forms.EmailInput(attrs={'class': 'in'}))
+
+    class Meta:
+        fields = ('email')
