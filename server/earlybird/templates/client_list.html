@@ -58,7 +58,12 @@
     <div class="homeless_list" style="height: 100%; overflow: scroll;">
       <div class="names" id="names">
         <center>
-          <h3 id="heading">List of People</h3>
+          <h3 id="heading">
+            List of People
+            {% if snooping %}
+            for {{caseworker_name}}
+            {% endif %}
+          </h3>
         </center>
         <ul class="final_list" id="final_list">
           {% for i in clients %}
@@ -83,6 +88,7 @@
         <br />
         <br />
         <h2 id="profile_status">Current Status:</h2>
+        <a id="remove_button" href='#'>Remove Client</button>
       </center>
     </div>
   </div>
