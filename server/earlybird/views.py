@@ -6,7 +6,7 @@ from django.contrib.auth import logout
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from .models import Client, PendingUsers
-from .forms import SignupForm, AddClient, ChangePassword
+from .forms import SignupForm, AddClient, ChangePassword, ForgotPassword
 from .send_email import send_email
 
 from .web_scraper import run_check
@@ -147,14 +147,19 @@ def client_page(request):
     return render(request, 'add_client.html', {'form': form})
 
 
+def generate_password():
+    password_chars = 'abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?'
+    password = ''.join(random.sample(password_chars, 8))
+
+
 def confirm_user(request, uuid=None):
     try:
         pending_user = PendingUsers.objects.get(key=uuid)
     except PendingUsers.DoesNotExist:
         return render(request, 'invalid_confirm_url.html')
+
     # give them a password
-    password_chars = 'abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?'
-    password = ''.join(random.sample(password_chars, 8))
+    password = generate_password()
 
     # create the user
     new_user = User.objects.create_user(first_name=pending_user.first_name, last_name=pending_user.last_name,
@@ -179,7 +184,7 @@ def confirm_user(request, uuid=None):
 
 @login_required
 def settings_page(request):
-    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False})
+    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False, 'username': request.user.username})
 
 
 def scrape_page(request):
@@ -196,3 +201,30 @@ def remove_client(request, name):
     client.delete()
 
     return redirect('{}account'.format(settings.PREFIX))
+
+
+def forgot_password(request):
+    if request.method == 'POST':
+        form = ForgotPassword(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+
+            # get user
+            try:
+                user = User.get(email=email)
+            except User.DoesNotExist:
+                return render(request, 'forgot_password.html', {'error': 'No account associated with {}'.format(email)})
+
+            # new password
+            password = generate_password()
+
+            user.set_password(password)
+            user.save()
+
+            # send email
+            send_email(email, 'Your earlybird password has been reset',
+                       'Your password has been reset. Your new password is {} <br /> <br />You can login at https://engineering.purdue.edu/earlybirdsystem/login'.format(password))
+
+            return redirect(settings.PREFIX)
+    else:
+        return render(request, 'forgot_password.html', {'form': ForgotPassword()})
