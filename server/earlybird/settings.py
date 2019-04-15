@@ -26,6 +26,8 @@ except FileNotFoundError:
     raise Exception(
         'Could not find creds.json, did you download it and put it in your `server` directory?')
 
+PRODUCTION = os.environ.get('EARLYBIRD_ON_ECN') == '1'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -36,7 +38,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = CREDENTIALS['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = not PRODUCTION
 
 ALLOWED_HOSTS = ['*']
 
@@ -115,8 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'earlybird.User'
 
-PREFIX = '/earlybirdsystem/' if os.environ.get(
-    'EARLYBIRD_ON_ECN') == '1' else '/'
+PREFIX = '/earlybirdsystem/' if PRODUCTION else '/'
 
 LOGIN_REDIRECT_URL = '{}account'.format(PREFIX)
 LOGIN_URL = '{}login'.format(PREFIX)
