@@ -83,7 +83,8 @@ label {
 }
 
 .error {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 1.5rem;
+    font-family: Raleway ,Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 1rem;
     color: red;
 }
