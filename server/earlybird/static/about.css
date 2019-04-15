@@ -1,3 +1,41 @@
+body {
+    background: #333;
+    color: white;
+    font-family: raleway;  
+}
+
+@media (min-width: 630px) {
+    .team-pic {
+        max-height: 40%;
+        max-width: 40%;
+        border-radius: 100%;
+    }
+
+    .info {
+        justify-content: center;
+        background-color: gray;
+        padding: 30px;
+        max-width: 60%;
+        border-radius: 1%;
+    }
+}
+
+@media (max-width: 630px) {
+    .team-pic {
+        max-height: 40%;
+        max-width: 90%;
+        border-radius: 100%;
+    }
+
+    .info {
+        justify-content: center;
+        background-color: gray;
+        padding: 30px;
+        max-width: 90%;
+        border-radius: 1%;
+    }
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -143,3 +181,22 @@ input {
     font-size: 1rem;
     color: red;
 }
+
+nav .item:hover {
+    color: gray;
+  }
+  
+  nav .item::before {
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: whitesmoke;
+    position: relative;
+    top: 0;
+    width: 0%;
+    transition: all ease-in-out 250ms;
+  }
+  
+  nav .item:hover::before {
+    width: 100%;
+  }
