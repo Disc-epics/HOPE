@@ -22,16 +22,15 @@
         <form class="form-seg" method='POST'>
             {% csrf_token %}
             {{ form.as_p }}
+            {% if forms.errors %}
+            <div class="row error">Your username and password didn't match. Please try again.</div>
+            {% endif %}
             <div class="row">
                 <input type='submit' class="btn btn-primary" value='Login' />
                 <a id="forgot-btn" class="btn btn-primary" href="#">Forgot Password</a>
                 <a id="register-btn" class="btn btn-primary" href="../register">Register</a>
             </div>
-            <div class="row error" id="error_msg"></div>
         </form>
-        {% if forms.errors %}
-        <div class="error">Your username and password didn't match. Please try again.</div>>
-        {% endif %}
     </div>
 </body>
 
