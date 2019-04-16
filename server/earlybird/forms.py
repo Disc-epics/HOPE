@@ -6,13 +6,13 @@ from django.contrib.auth.forms import UserCreationForm
 
 class SignupForm(forms.ModelForm):
     email = forms.CharField(
-        label="Email", widget=forms.EmailInput(attrs={'class': 'in'}))
+        label="Email")
     first_name = forms.CharField(
-        label="First Name", widget=forms.TextInput(attrs={'class': 'in'}))
+        label="First Name")
     last_name = forms.CharField(
-        label="Last Name", widget=forms.TextInput(attrs={'class': 'in'}))
+        label="Last Name")
     phone_number = forms.CharField(
-        label="Phone Number", widget=forms.TextInput(attrs={'class': 'in'}))
+        label="Phone Number")
 
     class Meta:
         model = User
