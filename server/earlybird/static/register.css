@@ -84,7 +84,24 @@ label {
 }
 
 label {
-    font: white;
+    text-align: center;
+    font-family: Raleway ,Helvetica, sans-serif;
+    font-size: 2em;
+}
+
+input {
+    position: relative;
+    left: 0%;
+    right: 0%;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    font-family: Raleway ,Helvetica, sans-serif;
+    font-size: 40px;
+    padding-inline-end: 0%;
+    background-color: black;
+    opacity: 0.5;
+    color: white;
 }
 
 .error {
