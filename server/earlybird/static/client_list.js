@@ -1,4 +1,5 @@
 var current_name;
+var current_element;
 
 function get_url(url) {
   let pathname = window.location.pathname.split('/');
@@ -10,6 +11,10 @@ function get_url(url) {
 }
 
 function update_center(ev) {
+  current_element.classList.remove('bg-info');
+  current_element = ev.target;
+  current_element.classList.add('bg-info');
+
   // console.log(ev.target.textContent)
   current_name = ev.target.textContent.trim();
   const profile_name = document.getElementById("profile_name");
@@ -25,4 +30,12 @@ function update_center(ev) {
   const profile_status = document.getElementById("profile_status");
   profile_status.textContent =
       "Status: " + (status ? "In jail" : "Not in jail");
+}
+
+window.onload = function() {
+  current_element = document.getElementById('first-client');
+  current_element.classList.add('bg-info');
+  var evObj = document.createEvent('Events');
+  evObj.initEvent('click', true, false);  // simulate the click event
+  current_element.dispatchEvent(evObj);
 }
