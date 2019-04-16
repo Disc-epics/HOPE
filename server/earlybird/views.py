@@ -64,7 +64,7 @@ def master_page(request):
         raise PermissionDenied
 
     user_list = [('{} {}'.format(u.first_name, u.last_name), u.email)
-                 for u in User.objects.all()]
+                 for u in User.objects.all() if u.email != settings.ADMIN_EMAIL]
     return render(request, 'dashboard_master.html', {'users': user_list})
 
 

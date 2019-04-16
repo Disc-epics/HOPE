@@ -77,7 +77,7 @@
         </center>
         <ul class="final_list" id="final_list">
           {% for i in clients %}
-          <li class="list_name" onclick="update_center(event)">
+          <li class="list_name" onclick="update_center(event)" {% if forloop.first %} id='first-client' {% endif %}>
             {{ i }}
           </li>
           {% endfor %}
@@ -113,7 +113,7 @@
   <footer class="footer card-footer bg-dark fixed-bottom">
     <div class="row">
       <div class="epics-img">
-        <div class="text"><a style="color: white" href="/">Earlybird Alert System</a></div>
+        <div class="text"><a style="color: white" href="{{prefix}}">Earlybird Alert System</a></div>
         <!-- <img style="max-width: 15%; max-height: 10%; float: right;" src="{{prefix}}static/images/epics_logo.png" /> -->
       </div>
     </div>
