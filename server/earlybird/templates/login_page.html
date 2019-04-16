@@ -19,7 +19,6 @@
 
 <body class="container">
     <div class="col-sm-3 login-box my-auto">
-        <h1>Login</h1>
         <form class="form-seg" method='POST'>
             {% csrf_token %}
             {{ form.as_p }}
@@ -28,7 +27,7 @@
             {% endif %}
             <div class="row">
                 <div>
-                    <input type='submit' class="btn btn-primary" value='Login' />
+                    <input type='submit' class="btn btn-primary" value='Login' style="margin-left: 2px" />
                 </div>
                 <div>
                     <a id="forgot-btn" class="btn btn-primary" href="../forgot_password">Forgot Password</a>
@@ -37,6 +36,14 @@
             </div>
         </form>
     </div>
+    <footer class="footer card-footer bg-dark fixed-top">
+        <div class="row">
+            <div class="epics-img">
+                <div class="text"><a style="color: white; float: left;" href="/">Earlybird Alert System</a></div>
+                <!-- <img style="max-width: 15%; max-height: 10%; float: right;" src="{{prefix}}static/images/epics_logo.png" /> -->
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
