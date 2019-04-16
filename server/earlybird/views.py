@@ -149,7 +149,7 @@ def client_page(request):
 
 def generate_password():
     password_chars = 'abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?'
-    password = ''.join(random.sample(password_chars, 8))
+    return ''.join(random.sample(password_chars, 8))
 
 
 def confirm_user(request, uuid=None):
@@ -211,7 +211,7 @@ def forgot_password(request):
 
             # get user
             try:
-                user = User.get(email=email)
+                user = User.objects.get(email=email)
             except User.DoesNotExist:
                 return render(request, 'forgot_password.html', {'error': 'No account associated with {}'.format(email)})
 
