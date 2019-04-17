@@ -156,3 +156,28 @@ input {
 footer .text {
     float: left;
   }
+
+  @media (max-width: 800px) {
+    nav .navbar-brand {
+      display: none;
+    }
+  }
+  
+  nav .item:hover {
+    color: gray;
+  }
+  
+  nav .item::before {
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: whitesmoke;
+    position: relative;
+    top: 0;
+    width: 0%;
+    transition: all ease-in-out 250ms;
+  }
+  
+  nav .item:hover::before {
+    width: 100%;
+  }
