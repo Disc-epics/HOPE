@@ -184,7 +184,7 @@ def confirm_user(request, uuid=None):
 
 @login_required
 def settings_page(request):
-    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False, 'username': request.user.username})
+    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False, 'username': request.user.username, 'prefix': settings.PREFIX})
 
 
 def scrape_page(request):
