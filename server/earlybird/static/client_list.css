@@ -139,9 +139,9 @@ nav .item:hover::before {
     font-size: 0.8 em;
   }
 
-  #profile-heading {
+  /* #profile-heading {
     display: none;
-  }
+  } */
 
   /* #profile {
     display: none;
