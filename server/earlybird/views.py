@@ -144,7 +144,7 @@ def client_page(request):
             return redirect('{}account/'.format(settings.PREFIX))
     else:
         form = AddClient()
-    return render(request, 'add_client.html', {'form': form})
+    return render(request, 'add_client.html', {'form': form, 'username': request.user.username})
 
 
 def generate_password():
