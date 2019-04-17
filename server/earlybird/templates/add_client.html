@@ -22,11 +22,49 @@
 </head>
 
 <body class="container">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand">{{ username }}</a>
+            <div id="my-nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <div class="item">Client List</div>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        {% if not snooping %}
+                        <a class="nav-link" href="./create_client" tabindex="-1" aria-disabled="true">
+                            <div class="item">Add New Client</div>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        {% if not snooping %}
+                        <a class="nav-link" href="./settings" tabindex="-1" aria-disabled="true">
+                            <div class="item">Settings</div>
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            {% if not snooping %}
+            <!-- <a href="./settings" class="logout btn btn-primary ml-auto">Settings</a> -->
+            <a href="./logout" class="logout btn btn-primary ml-auto">Logout</a>
+            {% endif %}
+            <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </header>
     <div class="col-sm-3 login-box my-auto">
         <form class="form-seg" method=POST>
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary" style="font-size: 1em">Add Client</button>
+            <button class="btn btn-primary" style="font-size: 1em">Back</button>
         </form>
     </div>
 </body>
