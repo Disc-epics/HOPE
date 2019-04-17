@@ -83,6 +83,10 @@
     color: white;
 }
 
+#early:hover {
+    text-decoration: none;
+}
+
 /* .btn.btn-primary {
     font-size: 1em;
     margin: 20px;
