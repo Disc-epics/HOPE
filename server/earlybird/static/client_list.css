@@ -140,7 +140,7 @@ nav .item:hover::before {
   }
 
   #profile {
-    display: none;
+    /* display: none; */
   }
 }
 
