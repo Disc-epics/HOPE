@@ -8,16 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Adding the Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway:500" rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway" rel="stylesheet" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../static/client_list.css" />
     <title>Hope</title>
 </head>
 
@@ -28,21 +25,21 @@
             <div id="my-nav" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../">
                             <div class="item">Client List</div>
-                            <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item active">
                         {% if not snooping %}
-                        <a class="nav-link" href="./create_client" tabindex="-1" aria-disabled="true">
+                        <a class="nav-link" href="./" tabindex="-1" aria-disabled="true">
                             <div class="item">Add New Client</div>
+                            <span class="sr-only">(current)</span>
                         </a>
                         {% endif %}
                     </li>
                     <li class="nav-item">
                         {% if not snooping %}
-                        <a class="nav-link" href="./settings" tabindex="-1" aria-disabled="true">
+                        <a class="nav-link" href="../settings" tabindex="-1" aria-disabled="true">
                             <div class="item">Settings</div>
                         </a>
                         {% endif %}
@@ -59,6 +56,10 @@
             </button>
         </nav>
     </header>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="col-sm-3 login-box my-auto">
         <form class="form-seg" method=POST>
             {% csrf_token %}
