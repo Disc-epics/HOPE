@@ -2,6 +2,8 @@
 
 ## Getting a local development server to run
 
+It is *highly* recommended to use Linux or macOS as a development environment for this project.
+On windows, you can use [windows subsystem for linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 ### Acquiring the credentials
 
@@ -36,6 +38,17 @@ python ./server/manage.py runserver
 ```
 
 Some systems (usually linux and mac) may require you to use `python3` instead of `python`.
+
+## Accessing the server files
+
+To access the server files, on windows type `\\templeton.ecn.purdue.edu\disc\` into windows
+explorer, and use the `disc` as the username and the disc ECN password found in `creds.json`.
+
+On macOS/Linux, connect to `smb://templeton.ecn.purdue.edu/disc/` or 
+`sftp://templeton.ecn.purdue.edu/web/groups/earlybirdsystem` with the same credentials.
+
+However, it is suggested for ease and reproducability to update the server using the `./scripts/deploy.py`
+script instead of manually copying files.
 
 ## Basic server setup
 The site is on ECN, which has a pretty restricted environment to run in.
@@ -75,6 +88,21 @@ ssh disc@templeton.ecn.purdue.edu
 Then there are several commands available, including `errorlog`, `restart`, etc.
 Use `help` to show all possibilities
 
+### Running a script on the server
+
+As there is no ssh access to the server, it is extremely difficult to run scripts on the server
+and get information about the server that is often very valuable (running processes, installed programs,
+etc). However, from the server program you can run programs (using `os.system`) or similar.
+
+There has been a script setup to automate this process, and it located in `./scripts/run_script_on_server.py`. It works by updating the `django.cgi` file with a simple script that just runs
+a bash process with the script provided on the commandline. Example:
+
+```bash
+./scripts/run_script_on_sever.py 'ps aux > running_processes.txt'
+```
+
+Which will write `running_processes.txt` in the `public_html` folder.
+
 ### Adding dependencies
 
 Because we don't have ssh access to the server, running commands is a pain, and the main reason we need to do that is
@@ -107,3 +135,24 @@ pw = CREDENTIALS['MY_PW']
 
 When you add a field to `creds.json`, make sure to re-upload it to the sharepoint, run 
 `scripts/deploy.py` to copy it to the server, and tell your teammates to re-download `creds.json`
+
+## Common errors
+
+There are a few common errors that took a long time to solve and are avoidable.
+
+### Links point to the ECN webpage instead of one of ours
+Because the server isn't mounted in the root directory of a domain (`https://engineering.purdue.edu/earlybirdsystem), having a `<a href='/'> ... </a?>` will link to `https://engineering.purdue.edu/`.
+
+To avoid this, you can either use relative urls (`../account`, as used in the login). If this isn't
+an option, there is a variable, `settings.PREFIX` that is available from Django that you can use
+in templates. The prefix is the path of the root directory, *including* the trailing slash.
+
+
+### Syntax errors on the server that don't happen locally
+
+These are a pain to debug, bug usually are some sort of dependency issue. See where the code is failing
+from the backtrace, and lookup on [`pypi`](https://pypi.org/) what the minimum required python version
+is for the version of the dependency you are using is. The server uses Python 3.4, so you may have to 
+downgrade to an older version that supports Python 3.4.
+
+Use the `./scripts/add_dependency.py` script to downgrade the library.
