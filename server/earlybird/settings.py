@@ -122,7 +122,7 @@ PREFIX = '/earlybirdsystem/' if PRODUCTION else '/'
 LOGIN_REDIRECT_URL = '{}account'.format(PREFIX)
 LOGIN_URL = '{}login'.format(PREFIX)
 
-ADMIN_EMAIL = 'russellgreene8@gmail.com'
+ADMIN_EMAIL = 'amurphy@lafayette.in.gov'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
