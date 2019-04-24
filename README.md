@@ -141,7 +141,7 @@ When you add a field to `creds.json`, make sure to re-upload it to the sharepoin
 There are a few common errors that took a long time to solve and are avoidable.
 
 ### Links point to the ECN webpage instead of one of ours
-Because the server isn't mounted in the root directory of a domain (`https://engineering.purdue.edu/earlybirdsystem), having a `<a href='/'> ... </a?>` will link to `https://engineering.purdue.edu/`.
+Because the server isn't mounted in the root directory of a domain (`https://engineering.purdue.edu/earlybirdsystem`), having a `<a href='/'> ... </a?>` will link to `https://engineering.purdue.edu/`.
 
 To avoid this, you can either use relative urls (`../account`, as used in the login). If this isn't
 an option, there is a variable, `settings.PREFIX` that is available from Django that you can use
