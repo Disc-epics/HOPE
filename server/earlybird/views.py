@@ -7,7 +7,8 @@ from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from .models import Client, PendingUsers
 from .forms import SignupForm, AddClient, ChangePassword, ForgotPassword
-from .send_email import send_email
+#from .send_email import send_email
+from django.core.mail import send_mail
 
 from .web_scraper import run_check
 
@@ -115,10 +116,21 @@ def register_page(request):
                 email=email, first_name=first_name, last_name=last_name, phone_number=phone_number, key=key)
             pending_user.save()
 
-            send_email(settings.ADMIN_EMAIL, 'Confirm registration for {} {}'.format(first_name, last_name),
-                       'User {first} {last} ({email}) has requested access to earlybird. <br />'
-                       'If you do not recognize this potential user, no action is required. If you would like to activate thier account, click the link below. <br /><br />'
-                       '<a href={url}>{url}</a>'.format(first=first_name, last=last_name, email=email, url="http://engineering.purdue.edu/earlybirdsystem/confirm/{}".format(key)))
+            # sending mail to Adam Murphy to verify user
+            # TODO: Adam's email is hardcoded in right now
+            #     - for some reason trying to get the admin email from the settings.py did not work
+            send_mail(
+                'Confirm registration for {} {}'.format(first_name, last_name),
+                'User {} {} ({}) has requested access to earlybird.\nIf you do not recognize this potential user, no action is required. If you would like to activate their account, click on the link below.\n\nhttps://engineering.purdue.edu/earlybirdsystem/confirm/{}'.format(first_name, last_name, email, key),
+                'earlybirdalertsystem@gmail.com',
+                ['amurphy@lafayette.in.gov'],
+            )
+
+
+            #send_email(settings.ADMIN_EMAIL, 'Confirm registration for {} {}'.format(first_name, last_name),
+            #           'User {first} {last} ({email}) has requested access to earlybird. <br />'
+            #           'If you do not recognize this potential user, no action is required. If you would like to activate thier account, click the link below. <br /><br />'
+            #           '<a href={url}>{url}</a>'.format(first=first_name, last=last_name, email=email, url="http://engineering.purdue.edu/earlybirdsystem/confirm/{}".format(key)))
 
             return render(request, 'request_received.html')
     else:
@@ -222,9 +234,12 @@ def forgot_password(request):
             user.save()
 
             # send email
-            send_email(email, 'Your earlybird password has been reset',
-                       'Your password has been reset. Your new password is {} <br /> <br />You can login at https://engineering.purdue.edu/earlybirdsystem/login'.format(password))
-
+            send_mail(
+                'Your earlybird password has been reset',
+                'Your password has been reset. Your new password is {} \nYou can login at https://engineering.purdue.edu/earlybirdsystem/login/'.format(password),
+                'earlybirdalertsystem@gmail.com',
+                ['{}'.format(email)],
+            )
             return redirect(settings.PREFIX)
     else:
         return render(request, 'forgot_password.html', {'form': ForgotPassword()})
