@@ -1,7 +1,7 @@
 body {
     background: #333;
     color: white;
-    font-family: raleway;  
+    font-family: 'Poiret One', cursive;  
 }
 
 @media (min-width: 630px) {

@@ -156,7 +156,7 @@ def client_page(request):
             return redirect('{}account/'.format(settings.PREFIX))
     else:
         form = AddClient()
-    return render(request, 'add_client.html', {'form': form})
+    return render(request, 'add_client.html', {'form': form, 'username': request.user.username})
 
 
 def generate_password():
@@ -196,7 +196,7 @@ def confirm_user(request, uuid=None):
 
 @login_required
 def settings_page(request):
-    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False, 'username': request.user.username})
+    return render(request, 'acct_settings.html', {'form': ChangePassword(), 'badpassword': False, 'username': request.user.username, 'prefix': settings.PREFIX})
 
 
 def scrape_page(request):

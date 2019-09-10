@@ -32,25 +32,3 @@ def send_email(toaddr, subject, message):
         print('Email Sent')
     except:
         print('Error: could not send email')
-
-
-def get_subject(status):
-    if status is True:
-        return "Alert ClientName has been arrested"
-    else:
-        return "ClientName has been released"
-
-
-def send_notification(toaddr, worker):
-    _html = """\
-      <html>
-        <body>
-          <p>Hi Caseworker name,<br>
-            Your ClientName was been release/arrested at date and time. Login to your Account for more detail.<br>
-            <a href="https://engineering.purdue.edu/earlybirdsystem">Real Python</a> 
-            For more information.
-          </p>
-        </body>
-      </html>
-      """
-    pass

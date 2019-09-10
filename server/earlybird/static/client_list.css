@@ -12,7 +12,8 @@ body {
 .image {
   border-radius: 100%;
   border: 1em;
-  background-color: #998899;
+  /* background-color: #998899; */
+  background-color: #888;
   max-height: 30vh;
   max-width: 30vh;
   padding: 2px;
@@ -138,9 +139,13 @@ nav .item:hover::before {
     font-size: 0.8 em;
   }
 
-  #profile {
+  /* #profile-heading {
     display: none;
-  }
+  } */
+
+  /* #profile {
+    display: none;
+  } */
 }
 
 .text a {
@@ -209,7 +214,7 @@ input {
   margin-bottom: 10px;
   font-family: Raleway ,Helvetica, sans-serif;
   font-size: 30px;
-  padding-inline-end: 10%;
+  padding-inline-end: 0%;
   background-color: black;
   opacity: 0.5;
   color: white;

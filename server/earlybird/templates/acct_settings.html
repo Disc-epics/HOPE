@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway" rel="stylesheet" />
     <link rel="stylesheet" href="{{prefix}}static/client_list.css" />
-    <link rel="stylesheet" href="../static/client_list.css" />
+    <link rel="stylesheet" href="{{prefix}}static/client_list.css" />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
@@ -32,20 +32,20 @@
             <div id="my-nav" class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../account/">
+                        <a class="nav-link" href="{{prefix}}account">
                             <div class="item">Client List</div>
                         </a>
                     </li>
                     <li class="nav-item">
                         {% if not snooping %}
-                        <a class="nav-link" href="./create_client" tabindex="-1" aria-disabled="true">
+                        <a class="nav-link" href="{{prefix}}account/create_client" tabindex="-1" aria-disabled="true">
                             <div class="item">Add New Client</div>
                         </a>
                         {% endif %}
                     </li>
                     <li class="nav-item active">
                         {% if not snooping %}
-                        <a class="nav-link" href="./settings" tabindex="-1" aria-disabled="true">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">
                             <div class="item">Settings</div>
                             <span class="sr-only">(current)</span>
                         </a>
@@ -55,7 +55,7 @@
             </div>
             {% if not snooping %}
             <!-- <a href="./settings" class="logout btn btn-primary ml-auto">Settings</a> -->
-            <a href="./logout" class="logout btn btn-primary ml-auto">Logout</a>
+            <a href="{{prefix}}account/logout" class="logout btn btn-primary ml-auto">Logout</a>
             {% endif %}
             <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
     <br>
     <br>
     <div class="col-sm-3 login-box my-auto mx-auto">
-        <form action="./change_password" method="POST">
+        <form action="{{prefix}}account/change_password" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <br>
@@ -88,7 +88,7 @@
     <footer class="footer card-footer bg-dark fixed-bottom">
         <div class="row">
             <div class="epics-img">
-                <div class="text"><a style="color: white" href="../..">Earlybird Alert System</a></div>
+                <div class="text"><a style="color: white" href="{{prefix}}">Earlybird Alert System</a></div>
                 <!-- <img style="max-width: 15%; max-height: 10%; float: right;" src="{{prefix}}static/images/epics_logo.png" /> -->
             </div>
         </div>
@@ -101,7 +101,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRi
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -13,6 +13,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway" rel="stylesheet" />
   <link rel="stylesheet" href="{{prefix}}static/client_list.css" />
@@ -69,7 +70,7 @@
             <br>
             <h3 style="position: fixed; font-family: righteous" id="heading">
           </div>
-          List of People
+          List of Clients
           {% if snooping %}
           for {{caseworker_name}}
           {% endif %}
@@ -91,7 +92,7 @@
     <div class="profile" id="profile">
       <center>
         <br />
-        <h2>Profile</h2>
+        <h2 id="profile-heading">Profile</h2>
         <br />
         <br />
         <img src="{{prefix}}static/images/dove2.png" class="image" />

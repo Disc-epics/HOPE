@@ -8,27 +8,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Adding the Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway:500" rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css?family=Merienda+One|Prociono|Raleway" rel="stylesheet" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../static/client_list.css" />
     <title>Hope</title>
 </head>
 
 <body class="container">
-    <div class="col-sm-3 login-box my-auto">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand">{{ username }}</a>
+            <div id="my-nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./">
+                            <div class="item">Client List</div>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        {% if not snooping %}
+                        <a class="nav-link" href="./" tabindex="-1" aria-disabled="true">
+                            <div class="item">Add New Client</div>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        {% if not snooping %}
+                        <a class="nav-link" href="./settings" tabindex="-1" aria-disabled="true">
+                            <div class="item">Settings</div>
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            {% if not snooping %}
+            <!-- <a href="./settings" class="logout btn btn-primary ml-auto">Settings</a> -->
+            <a href="./logout" class="logout btn btn-primary ml-auto">Logout</a>
+            {% endif %}
+            <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </header>
+    <br>
+    <br>
+    <div class="col-sm-3 login-box mr-auto">
         <form class="form-seg" method=POST>
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary" style="font-size: 1em">Add Client</button>
+            <a class="btn btn-primary" href="../account" style="font-size: 1em">Back</a>
         </form>
     </div>
+
+    <script src="{{prefix}}static/client_list.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
